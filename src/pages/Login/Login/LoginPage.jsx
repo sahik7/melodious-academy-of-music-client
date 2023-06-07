@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsFillEyeFill,BsFillEyeSlashFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { IdentityContext } from '../../../provider/IdentityProvider';
 
 const LoginPage = () => {
+  const { googleSignIn } = useContext(IdentityContext)
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit } = useForm();
 
@@ -11,6 +13,18 @@ const LoginPage = () => {
     // Handle form submission
     console.log(data);
   };
+
+  const handleGoogleLogIn = async() => {
+    try {
+      const result = await googleSignIn();
+      const user = result.user;
+      console.log(user);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    }
+  }
 
   return (
     <div className="flex">
@@ -58,17 +72,13 @@ const LoginPage = () => {
             login
           </button>
           <p className='text-neutral-500'>OR</p>
-          <button
+          <button type="button" onClick={handleGoogleLogIn}
             className="border border-neutral-300 hover:scale-95 duration-200 hover:bg-neutral-200 px-20 py-2 rounded"
-            type="submit"
           >
             <img className="w-[1.5rem] mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png" alt="" />
           </button>
           </div>
         </form>
-        <div className="flex items-center justify-center mt-6">
-          {/* TODO: google sign in method */}
-        </div>
       </div>
       <div className="w-2/6 border bg-no-repeat bg-cover bg-center bg-[url('https://burst.shopifycdn.com/photos/harp-instrument-close-up.jpg?width=373&format=pjpg&exif=1&iptc=1')] h-[700px]">
       </div>
