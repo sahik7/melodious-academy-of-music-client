@@ -3,19 +3,47 @@ import { useForm } from 'react-hook-form';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { IdentityContext } from '../../../provider/IdentityProvider';
+import { toast } from 'react-hot-toast';
 
 const RegisterPage = () => {
-  const { googleSignIn } = useContext(IdentityContext)
+  const { googleSignIn,emailPasswordRegistration,updateNameAndImage } = useContext(IdentityContext)
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = (data) => {
-    // Handle form submission
-    console.log(data);
+  const handleEmailPasswordRegister = async (registerInfo) => {
+    const { email, password,confirmPassword ,name, photoURL } = registerInfo;
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+
+    // Check password complexity
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!passwordRegex.test(password)) {
+      toast.error('Password should be at least 6 characters long, contain a capital letter, and a special character');
+      return;
+    }
+    try {
+      await emailPasswordRegistration(email, password);
+      toast.success('Registration successful');
+      reset();
+
+      try {
+        const result = await updateNameAndImage(name, photoURL);
+        toast.success('Name and image updated successfully');
+        console.log('Update result:', result);
+      } catch (error) {
+        toast.error('Failed to update name and image');
+        console.log('Update error:', error);
+      }
+    } catch (error) {
+      toast.error('Registration failed');
+      console.log('Registration error:', error);
+    }
   };
 
-  const handleGoogleLogIn = async() => {
+  const handleGoogleLogIn = async () => {
     try {
       const result = await googleSignIn();
       const user = result.user;
@@ -28,9 +56,9 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className="flex">
-      <div className="m-32 w-3/6">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 mx-auto mt-10">
+    <div className="flex justify-between">
+      <div className="my-32 ml-10 w-3/6">
+        <form onSubmit={handleSubmit(handleEmailPasswordRegister)} className="w-2/3 mx-auto mt-10">
           <h2 className="text-4xl font-bold mb-10">Register</h2>
           <div className="mb-8">
             <input
@@ -73,15 +101,15 @@ const RegisterPage = () => {
             </div>
           </div>
           <div className="mb-8">
-          <div className="relative">
-            <input
-              className="input-field"
-              id="confirmPassword"
-              type="password"
-              placeholder="Confirm your password"
-              {...register('confirmPassword', { required: true })}
-            />
-            <button
+            <div className="relative">
+              <input
+                className="input-field"
+                id="confirmPassword"
+                type={showConfirmPassword ? 'text' : 'password'}
+                placeholder="Confirm your password"
+                {...register('confirmPassword', { required: true })}
+              />
+              <button
                 type="button"
                 className="absolute top-2 right-2 text-gray-500"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -92,10 +120,10 @@ const RegisterPage = () => {
                   <BsFillEyeSlashFill size={20} />
                 )}
               </button>
-              </div>
+            </div>
           </div>
           <div className="mb-8">
-            
+
             <input
               className="input-field"
               id="photoURL"
@@ -126,7 +154,7 @@ const RegisterPage = () => {
               />
             </button>
           </div>
-          
+
         </form>
       </div>
       <div className="w-2/6 border bg-no-repeat bg-cover bg-center bg-[url('https://burst.shopifycdn.com/photos/harp-instrument-close-up.jpg?width=373&format=pjpg&exif=1&iptc=1')] h-[800px]"></div>
