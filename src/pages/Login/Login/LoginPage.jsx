@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsFillEyeFill,BsFillEyeSlashFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,29 +13,23 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md w-full bg-white p-8 rounded shadow-md">
-        <h2 className="text-2xl font-bold mb-6">Login</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-              Email
-            </label>
+    <div className="flex">
+      <div className="m-32 w-3/6">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 mx-auto mt-10">
+        <h2 className="text-4xl font-bold mb-10">Login</h2>
+          <div className="mb-8 ">
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="input-field"
               id="email"
               type="email"
               placeholder="Enter your email"
               {...register('email', { required: true })}
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-              Password
-            </label>
+          <div className="mb-8 ">
             <div className="relative">
               <input
-                className="border-b-2 border-b-gray-300 focus:outline-0 w-full py-2 px-3 focus:border-b-gray-600 border-white duration-200"
+                className="input-field"
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Enter your password"
@@ -49,40 +44,33 @@ const LoginPage = () => {
               </button>
             </div>
           </div>
+        <div className="mt-4">
+       Do not have any account 
+          <Link className="text-main hover:underline ml-2" to="/register">
+             Register
+          </Link>
+        </div>
+          <div className="flex mt-10 justify-between items-center">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="btn-primary bg-main py-2 px-16"
             type="submit"
           >
-            Sign In
+            login
           </button>
-        </form>
-        <div className="text-center mt-4">
-          <a className="text-blue-500 hover:underline" href="/register">
-            Create an account
-          </a>
-        </div>
-        <div className="flex items-center justify-center mt-6">
-          <span className="mr-2">Or sign in with:</span>
-          <a
-            className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full h-10 w-10 p-2"
-            href="#"
+          <p className='text-neutral-500'>OR</p>
+          <button
+            className="border border-neutral-300 hover:scale-95 duration-200 hover:bg-neutral-200 px-20 py-2 rounded"
+            type="submit"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-              />
-            </svg>
-          </a>
+            <img className="w-[1.5rem] mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png" alt="" />
+          </button>
+          </div>
+        </form>
+        <div className="flex items-center justify-center mt-6">
+          {/* TODO: google sign in method */}
         </div>
+      </div>
+      <div className="w-2/6 border bg-no-repeat bg-cover bg-center bg-[url('https://burst.shopifycdn.com/photos/harp-instrument-close-up.jpg?width=373&format=pjpg&exif=1&iptc=1')] h-[700px]">
       </div>
     </div>
   );
