@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IdentityContext } from '../../../provider/IdentityProvider';
 import { toast } from 'react-hot-toast';
 
@@ -9,12 +9,17 @@ const LoginPage = () => {
   const { googleSignIn,emailPasswordSignIn } = useContext(IdentityContext)
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit,reset } = useForm();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || '/';
 
   const handleEmailPasswordLogin = (userInfo) => {
     const { email, password } = userInfo;
     emailPasswordSignIn(email, password).then(userData => {
       reset()
       toast.success("Login Successfully");
+      navigate(from, { replace: true });
     }).catch(err => {
       console.log(err);
       toast.error(err.code.split("auth/"),{duration:3000});
@@ -24,12 +29,14 @@ const LoginPage = () => {
   const handleGoogleLogIn = async () => {
     try {
       const result = await googleSignIn();
-      const user = result.user;
-      console.log(user);
+      if(result.user){
+        toast.success("Login Successfully");
+        reset()
+        navigate(from, { replace: true });
+      }
     } catch (error) {
       const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
+      toast.error(errorCode.split("auth/"),{duration:3000})
     }
   }
 

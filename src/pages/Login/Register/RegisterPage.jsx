@@ -1,18 +1,22 @@
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IdentityContext } from '../../../provider/IdentityProvider';
 import { toast } from 'react-hot-toast';
 
 const RegisterPage = () => {
-  const { googleSignIn,emailPasswordRegistration,updateNameAndImage } = useContext(IdentityContext)
+  const { googleSignIn, emailPasswordRegistration, updateNameAndImage } = useContext(IdentityContext)
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { register, handleSubmit, reset } = useForm();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || '/';
 
   const handleEmailPasswordRegister = async (registerInfo) => {
-    const { email, password,confirmPassword ,name, photoURL } = registerInfo;
+    const { email, password, confirmPassword, name, photoURL } = registerInfo;
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
       return;
@@ -28,6 +32,7 @@ const RegisterPage = () => {
       await emailPasswordRegistration(email, password);
       toast.success('Registration successful');
       reset();
+      navigate(from, { replace: true });
 
       try {
         const result = await updateNameAndImage(name, photoURL);
@@ -46,12 +51,14 @@ const RegisterPage = () => {
   const handleGoogleLogIn = async () => {
     try {
       const result = await googleSignIn();
-      const user = result.user;
-      console.log(user);
+      if (result.user) {
+        toast.success("Login Successfully");
+        reset()
+        navigate(from, { replace: true })
+      }
     } catch (error) {
       const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
+      toast.error(errorCode.split("auth/"), { duration: 3000 })
     }
   }
 
