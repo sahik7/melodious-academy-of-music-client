@@ -4,7 +4,7 @@ import Sidebar from '../components/Dashboard/Sidebar';
 import Holder from '../components/Holder';
 
 const Dashboard = () => {
-    const isAdmin = true;
+    
     return (
         <>
             <Navbar/>
