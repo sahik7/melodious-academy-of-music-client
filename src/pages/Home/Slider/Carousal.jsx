@@ -51,7 +51,7 @@ const Carousel = () => {
       } transition-opacity duration-500 absolute inset-0`}
     >
       <img src={slide.image} alt={slide.title} className="w-full object-cover h-[500px]" />
-      <div className="carousel-content absolute left-20 border top-1/2 transform -translate-y-1/2 text-white">
+      <div className="carousel-content absolute border w-10/12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
         <h2 className="text-2xl font-bold mb-4">{slide.title}</h2>
         <p className="text-gray-200">{slide.text}</p>
       </div>

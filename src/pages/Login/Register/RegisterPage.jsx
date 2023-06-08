@@ -37,7 +37,9 @@ const RegisterPage = () => {
       try {
         const result = await updateNameAndImage(name, photoURL);
         toast.success('Name and image updated successfully');
-        console.log('Update result:', result);
+        fetch(`http://localhost:5000/users/${email}`, {method: "PUT",headers:{"content-type": "application/json"},body: JSON.stringify({name,email})}).then(res => res.json()).then(data => {
+          console.log(data)
+        })
       } catch (error) {
         toast.error('Failed to update name and image');
         console.log('Update error:', error);

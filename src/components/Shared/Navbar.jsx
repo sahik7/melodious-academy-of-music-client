@@ -23,9 +23,9 @@ const Navbar = () => {
             <Holder>
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                        <NavLink to="/" className="text-white text-xl font-bold">
+                        <Link to="/" className="text-white text-xl font-bold">
                             <img src="logo-melodious.png" alt="" />
-                        </NavLink>
+                        </Link>
                     </div>
 
                     <div className="hidden md:flex md:items-center md:space-x-6">

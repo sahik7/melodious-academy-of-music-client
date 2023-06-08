@@ -6,6 +6,7 @@ import RegisterPage from "../pages/Login/Register/RegisterPage";
 import Main from "../structures/Main"
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import Home from "../pages/Home/Home";
+import Dashboard from "../structures/Dashboard";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -30,4 +31,10 @@ export const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: "/dashboard",
+    element: <Dashboard/>,
+    errorElement:<NotFoundPage/>,
+    children:[]
+  }
 ]);
