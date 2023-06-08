@@ -2,14 +2,19 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 
 const ManageUsers = () => {
-    const [isButtonDisabled, setButtonDisabled] = useState(false);
+    const [isAdminButtonDisabled, setAdminButtonDisabled] = useState(false);
+    const [isInstructorButtonDisabled, setInstructorButtonDisabled] = useState(false);
     const query = useQuery(["users"], async () => {
         const res = await fetch("http://localhost:5000/users");
         return res.json();
     });
-    const handleButtonDisabled = () => {
+    const handleAdminButtonDisabled = () => {
         console.log("Button disabled");
-        setButtonDisabled(true);
+        setAdminButtonDisabled(true);
+    };
+    const handleInstructorButtonDisabled = () => {
+        console.log("Button disabled");
+        setInstructorButtonDisabled(true);
     };
 
     const fakeData = [
@@ -52,16 +57,21 @@ const ManageUsers = () => {
                             <td className="table-data">{item?.position}</td>
                             <td className="table-data">
                                 <button
-                                    className={`bg-third/20  border-2 rounded border-third  font-bold text-sm py-1 px-3 mr-2 ${isButtonDisabled ? 'opacity-50 hover:scale-100 text-second hover:bg-third bg-third' : 'text-third hover:bg-third hover:text-second hover:scale-95 duration-100'
+                                    className={`bg-third/20  border-2 rounded border-third  font-bold text-sm py-1 px-3 mr-2 ${isAdminButtonDisabled ? 'opacity-50 hover:scale-100 text-second hover:bg-third bg-third' : 'text-third hover:bg-third hover:text-second hover:scale-95 duration-100'
                                         }`}
-                                    disabled={isButtonDisabled}
-                                    onClick={handleButtonDisabled}
+                                    disabled={isAdminButtonDisabled}
+                                    onClick={handleAdminButtonDisabled}
                                 >
                                     Make Admin
                                 </button>
                             </td>
                             <td className="border-b pr-4 py-4">
-                                <button className="bg-main/20 text-main border-2 rounded border-main hover:bg-main hover:text-second hover:scale-95 duration-100 font-bold text-sm py-1 px-3 mr-2">
+                            <button
+                                    className={`bg-main/20  border-2 rounded border-main  font-bold text-sm py-1 px-3 mr-2 ${isInstructorButtonDisabled ? 'opacity-50 hover:scale-100 text-second hover:bg-main bg-red-500' : 'text-main hover:bg-main hover:text-second hover:scale-95 duration-100'
+                                        }`}
+                                    disabled={isInstructorButtonDisabled}
+                                    onClick={handleInstructorButtonDisabled}
+                                >
                                     Make Instructor
                                 </button>
                             </td>
