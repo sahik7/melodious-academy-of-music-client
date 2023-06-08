@@ -9,12 +9,10 @@ const Dashboard = () => {
     return (
         <>
             <Navbar/>
-            <Holder>
-                <div className='flex justify-between'>
+                <div className='flex w-11/12 mx-auto items-center justify-between'>
             <Sidebar/>
             <Outlet/>
                 </div>
-            </Holder>
             </>
     );
 };
