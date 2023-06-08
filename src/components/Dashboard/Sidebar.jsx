@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { SiGoogleclassroom } from 'react-icons/si';
+import { FaUsers } from 'react-icons/fa';
 
 const Sidebar = () => {
     const location = useLocation();
@@ -11,23 +13,23 @@ const Sidebar = () => {
     };
 
     return (
-        <div className="w-64">
-            <div className="border p-6 my-5 rounded h-full border-second">
+        <div className="w-72">
+            <div className="border-2 p-8 my-5 rounded-md h-full border-second">
                 <div className="space-y-2">
                     <div className={`rounded ${isLinkActive('/dashboard/manage-classes') ? 'bg-main text-second' : ''}`}>
                         <Link
                             to="manage-classes"
-                            className={` w-full rounded hover:bg-main hover:text-second px-6 py-4 inline-block font-bold`}
+                            className={`flex items-center justify-evenly w-full rounded hover:bg-main hover:text-second px-6 py-4 font-bold`}
                         >
-                            Manage Classes
+                           <SiGoogleclassroom size={22}/> Manage Classes
                         </Link>
                     </div>
                     <div className={`rounded ${isLinkActive('/dashboard/manage-users') ? 'bg-main text-second' : ''}`}>
-                        <Link
+                    <Link
                             to="manage-users"
-                            className={` w-full rounded hover:bg-main hover:text-second px-6 py-4 inline-block font-bold`}
+                            className={`flex items-center justify-evenly w-full rounded hover:bg-main hover:text-second px-6 py-4 font-bold`}
                         >
-                            Manage Users
+                            <FaUsers size={22}/>Manage Users
                         </Link>
                     </div>
 
