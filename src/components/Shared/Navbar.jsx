@@ -14,7 +14,7 @@ const Navbar = () => {
     };
 
     // Function to check if a route is active based on the current location
-    const isActiveRoute = (path) => {
+    const onClickRoute = (path) => {
         return location.pathname === path;
     };
 
@@ -32,8 +32,8 @@ const Navbar = () => {
                         {/* Home NavLink */}
                         <NavLink
                             to="/"
-                            isActive={() => isActiveRoute('/')}
-                            className={`text-black hover:text-main ${isActiveRoute('/') ? 'text-main' : ''
+                            onClick={() => onClickRoute('/')}
+                            className={`text-black hover:text-main ${onClickRoute('/') ? 'text-main' : ''
                                 }`}
                         >
                             Home
@@ -42,8 +42,8 @@ const Navbar = () => {
                         {/* Instructors NavLink */}
                         <NavLink
                             to="/instructors"
-                            isActive={() => isActiveRoute('/instructors')}
-                            className={`text-black hover:text-main ${isActiveRoute('/instructors') ? 'text-main' : ''
+                            onClick={() => onClickRoute('/instructors')}
+                            className={`text-black hover:text-main ${onClickRoute('/instructors') ? 'text-main' : ''
                                 }`}
                         >
                             instructors
@@ -52,8 +52,8 @@ const Navbar = () => {
                         {/* Classes NavLink */}
                         <NavLink
                             to="/classes"
-                            isActive={() => isActiveRoute('/classes')}
-                            className={`text-black hover:text-main ${isActiveRoute('/classes') ? 'text-main' : ''
+                            onClick={() => onClickRoute('/classes')}
+                            className={`text-black hover:text-main ${onClickRoute('/classes') ? 'text-main' : ''
                                 }`}
                         >
                             classes
@@ -64,8 +64,8 @@ const Navbar = () => {
                             <>
                                 <NavLink
                                     to="/dashboard"
-                                    isActive={() => isActiveRoute('/dashboard')}
-                                    className={`text-black hover:text-main ${isActiveRoute('/dashboard') ? 'text-main' : ''
+                                    onClick={() => onClickRoute('/dashboard')}
+                                    className={`text-black hover:text-main ${onClickRoute('/dashboard') ? 'text-main' : ''
                                         }`}
                                 >
                                     dashboard
@@ -105,21 +105,21 @@ const Navbar = () => {
                     <div className="md:hidden bg-main absolute right-12 top-20 w-1/3 rounded py-2">
                         <NavLink
                             to="/"
-                            className={`block text-second lg:ml-3 hover:text-main py-1 ${isActiveRoute('/') ? 'text-main bg-second' : ''
+                            className={`block text-second lg:ml-3 hover:text-main py-1 ${onClickRoute('/') ? 'text-main bg-second' : ''
                                 }`}
                         >
                             Home
                         </NavLink>
                         <NavLink
                             to="/instructors"
-                            className={`text-black hover:text-main ${isActiveRoute('/instructors') ? 'text-main' : ''
+                            className={`text-black hover:text-main ${onClickRoute('/instructors') ? 'text-main' : ''
                                 }`}
                         >
                             instructors
                         </NavLink>
                         <NavLink
                             to="/classes"
-                            className={`text-black hover:text-main ${isActiveRoute('/classes') ? 'text-main' : ''
+                            className={`text-black hover:text-main ${onClickRoute('/classes') ? 'text-main' : ''
                                 }`}
                         >
                             classes
@@ -127,7 +127,7 @@ const Navbar = () => {
                         {user && (
                             <NavLink
                                 to="/dashboard"
-                                className={`text-black hover:text-main ${isActiveRoute('/dashboard') ? 'text-main' : ''
+                                className={`text-black hover:text-main ${onClickRoute('/dashboard') ? 'text-main' : ''
                                     }`}
                             >
                                 dashboard
