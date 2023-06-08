@@ -8,32 +8,31 @@ const ManageUsers = () => {
         const res = await fetch("http://localhost:5000/users");
         return res.json();
     });
-    const handleAdminButtonDisabled = () => {
-        console.log("Button disabled");
+    const { data: users = [], refetch } = query;
+    const handleAdminButton = (id) => {
+fetch(`http://localhost:5000/users/${id}`,{
+    method: "PATCH",
+}).then(response => response.json()).then(data => {
+    if(data.modifiedCount) {
+        refetch()
+        console.log("admin set")
         setAdminButtonDisabled(true);
+    }
+})
     };
     const handleInstructorButtonDisabled = () => {
-        console.log("Button disabled");
+
         setInstructorButtonDisabled(true);
     };
 
-    const fakeData = [
-        {
-            id: 1,
-            image: 'https://via.placeholder.com/50',
-            name: 'John Doe',
-            email: 'johndoe@example.com',
-            position: 'Student',
-        },
-    ];
 
-    const { data: users = [], refetch } = query;
+   
 
 
 
     return (
         <div className=" w-9/12">
-            <table className="border-collapse w-full mt-28">
+            <table className="border-collapse w-full mt-10">
                 <thead className="">
                     <tr className="bg-second/50 text-left ">
                         <th className="table-head rounded-tl-md ">No</th>
@@ -46,7 +45,7 @@ const ManageUsers = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {fakeData.map((item, index) => (
+                    {users.map((item, index) => (
                         <tr key={index}>
                             <td className="table-data">{index + 1}</td>
                             <td className="table-data">
@@ -60,7 +59,7 @@ const ManageUsers = () => {
                                     className={`bg-third/20  border-2 rounded border-third  font-bold text-sm py-1 px-3 mr-2 ${isAdminButtonDisabled ? 'opacity-50 hover:scale-100 text-second hover:bg-third bg-third' : 'text-third hover:bg-third hover:text-second hover:scale-95 duration-100'
                                         }`}
                                     disabled={isAdminButtonDisabled}
-                                    onClick={handleAdminButtonDisabled}
+                                    onClick={() => handleAdminButton(item._id)}
                                 >
                                     Make Admin
                                 </button>
