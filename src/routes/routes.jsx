@@ -7,6 +7,7 @@ import Main from "../structures/Main"
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import Home from "../pages/Home/Home";
 import Dashboard from "../structures/Dashboard";
+import ManageUsers from "../components/Dashboard/Admin/ManageUsers";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -42,7 +43,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "manage-users",
-    element: <p>hello this is users</p>,
+    element: <ManageUsers/>,
       }
     ]
   }

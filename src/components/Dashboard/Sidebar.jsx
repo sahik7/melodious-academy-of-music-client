@@ -2,10 +2,14 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SiGoogleclassroom } from 'react-icons/si';
 import { FaUsers } from 'react-icons/fa';
+import { AiOutlineVideoCameraAdd } from 'react-icons/ai';
+import { BsCollectionFill } from 'react-icons/bs';
+import { ImDownload } from 'react-icons/im';
+import { MdPayments } from 'react-icons/md';
 
 const Sidebar = () => {
     const location = useLocation();
-    const userRole = "instructor";
+    const userRole = "admin";
 
     // Function to check if a link is active based on the current location
     const isLinkActive = (pathname) => {
@@ -17,7 +21,7 @@ const Sidebar = () => {
         <div className="w-72">
             {/* Admin Dashboard */}
             {userRole === 'admin' && <><h1 className='text-2xl text-black mt-10 font-bold'>Admin Dashboard</h1>
-            <div className="border-2 p-8 my-5 rounded-md h-full border-second">
+            <div className="border-2 p-8 my-5 rounded-md border-second">
                 <div className="space-y-2">
                     <div className={`rounded ${isLinkActive('/dashboard/manage-classes') ? 'bg-main text-second' : ''}`}>
                         <Link
@@ -45,9 +49,9 @@ const Sidebar = () => {
                     <div className={`rounded ${isLinkActive('/dashboard/manage-classes') ? 'bg-main text-second' : ''}`}>
                         <Link
                             to="manage-classes"
-                            className={`flex items-center w-full rounded hover:bg-main hover:text-second  py-4 font-bold`}
+                            className={`flex items-center w-full rounded hover:bg-main hover:text-second py-4 font-bold`}
                         >
-                           <SiGoogleclassroom className='mx-4' size={22}/>My Selected Classes
+                           <ImDownload className='mx-3' size={22}/>My Selected Classes
                         </Link>
                     </div>
                     <div className={`rounded ${isLinkActive('/dashboard/manage-users') ? 'bg-main text-second' : ''}`}>
@@ -55,7 +59,7 @@ const Sidebar = () => {
                             to="manage-users"
                             className={`flex items-center w-full rounded hover:bg-main hover:text-second  py-4 font-bold`}
                         >
-                            <FaUsers className='mx-4' size={22}/>My Enrolled Classes
+                            <MdPayments className='mx-4' size={22}/>My Enrolled Classes
                         </Link>
                     </div>
 
@@ -70,7 +74,7 @@ const Sidebar = () => {
                             to="manage-classes"
                             className={`flex items-center w-full rounded hover:bg-main hover:text-second  py-4 font-bold`}
                         >
-                           <SiGoogleclassroom className='mx-4' size={22}/>My Classes
+                           <BsCollectionFill className='mx-4' size={22}/>My Classes
                         </Link>
                     </div>
                     <div className={`rounded ${isLinkActive('/dashboard/manage-users') ? 'bg-main text-second' : ''}`}>
@@ -78,7 +82,7 @@ const Sidebar = () => {
                             to="manage-users"
                             className={`flex items-center w-full rounded hover:bg-main hover:text-second  py-4 font-bold`}
                         >
-                            <FaUsers  className='mx-4' size={22}/>Add a Class
+                            <AiOutlineVideoCameraAdd  className='mx-4' size={22}/>Add a Class
                         </Link>
                     </div>
 
