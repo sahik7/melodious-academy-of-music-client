@@ -32,9 +32,18 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path: "/dashboard",
+    path: "dashboard",
     element: <Dashboard/>,
     errorElement:<NotFoundPage/>,
-    children:[]
+    children:[
+      {
+        path: "manage-classes",
+    element: <p>hello this is classes</p>,
+      },
+      {
+        path: "manage-users",
+    element: <p>hello this is users</p>,
+      }
+    ]
   }
 ]);

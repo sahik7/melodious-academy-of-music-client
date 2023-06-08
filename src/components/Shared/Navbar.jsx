@@ -23,15 +23,16 @@ const Navbar = () => {
             <Holder>
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                        <Link to="/" className="text-white text-xl font-bold">
+                        <NavLink to="/" className="text-white text-xl font-bold">
                             <img src="logo-melodious.png" alt="" />
-                        </Link>
+                        </NavLink>
                     </div>
 
                     <div className="hidden md:flex md:items-center md:space-x-6">
                         {/* Home NavLink */}
                         <NavLink
                             to="/"
+                            isActive={() => isActiveRoute('/')}
                             className={`text-black hover:text-main ${isActiveRoute('/') ? 'text-main' : ''
                                 }`}
                         >
@@ -41,19 +42,21 @@ const Navbar = () => {
                         {/* Instructors NavLink */}
                         <NavLink
                             to="/instructors"
+                            isActive={() => isActiveRoute('/instructors')}
                             className={`text-black hover:text-main ${isActiveRoute('/instructors') ? 'text-main' : ''
                                 }`}
                         >
-                            Instructors
+                            instructors
                         </NavLink>
 
                         {/* Classes NavLink */}
                         <NavLink
                             to="/classes"
+                            isActive={() => isActiveRoute('/classes')}
                             className={`text-black hover:text-main ${isActiveRoute('/classes') ? 'text-main' : ''
                                 }`}
                         >
-                            Classes
+                            classes
                         </NavLink>
 
                         {/* Dashboard NavLink and User Profile */}
@@ -61,10 +64,11 @@ const Navbar = () => {
                             <>
                                 <NavLink
                                     to="/dashboard"
+                                    isActive={() => isActiveRoute('/dashboard')}
                                     className={`text-black hover:text-main ${isActiveRoute('/dashboard') ? 'text-main' : ''
                                         }`}
                                 >
-                                    Dashboard
+                                    dashboard
                                 </NavLink>
                                 <img
                                     src={user.photoURL}
@@ -81,9 +85,9 @@ const Navbar = () => {
                             </button>
                         ) : (
                             <button className="btn-primary bg-main py-2 px-4">
-                                <NavLink to="/login" className="hover:text-main">
+                                <Link to="/login" className="hover:text-main">
                                     Login
-                                </NavLink>
+                                </Link>
                             </button>
                         )}
                     </div>
@@ -108,35 +112,34 @@ const Navbar = () => {
                         </NavLink>
                         <NavLink
                             to="/instructors"
-                            className={`block text-second lg:ml-3 hover:text-main py-1 ${isActiveRoute('/instructors') ? 'text-main bg-second' : ''
+                            className={`text-black hover:text-main ${isActiveRoute('/instructors') ? 'text-main' : ''
                                 }`}
                         >
-                            Instructors
+                            instructors
                         </NavLink>
                         <NavLink
                             to="/classes"
-                            className={`block text-second lg:ml-3 hover:text-main py-1 ${isActiveRoute('/classes') ? 'text-main bg-second' : ''
+                            className={`text-black hover:text-main ${isActiveRoute('/classes') ? 'text-main' : ''
                                 }`}
                         >
-                            Classes
+                            classes
                         </NavLink>
                         {user && (
                             <NavLink
                                 to="/dashboard"
-                                className={`block text-second lg:ml-3 hover:text-main py-1 ${isActiveRoute('/dashboard') ? 'text-main bg-second' : ''
+                                className={`text-black hover:text-main ${isActiveRoute('/dashboard') ? 'text-main' : ''
                                     }`}
                             >
-                                Dashboard
+                                dashboard
                             </NavLink>
                         )}
                         {!user && (
-                            <NavLink
+                            <Link
                                 to="/login"
-                                className={`block text-second lg:ml-3 hover:text-main py-1 ${isActiveRoute('/login') ? 'text-main bg-second' : ''
-                                    }`}
+                                className="block text-second lg:ml-3 hover:text-main py-1"
                             >
                                 Login
-                            </NavLink>
+                            </Link>
                         )}
                     </div>
                 )}

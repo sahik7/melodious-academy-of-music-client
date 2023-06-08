@@ -3,24 +3,18 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
     return (
-        <div className="flex">
-                <div className="w-64 h-screen">
-                    <nav className="mt-10">
-                        <ul className="space-y-2">
-                            <li>
-                                <Link to="/manage-classes" className="text-blue-500 hover:text-blue-700 block">
-                                    Manage Classes
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/manage-users" className="text-blue-500 hover:text-blue-700 block">
-                                    Manage Users
-                                </Link>
-                            </li>
-                        </ul>
-                    </nav>
+        <div className="w-64">
+            <div className=" border p-6 my-5 rounded h-full border-second">
+                <div className="">
+                    <Link to="manage-classes" className="text-md w-full  bg-white rounded hover:bg-main hover:text-second px-6 py-4 inline-block font-bold">
+                        Manage Classes
+                    </Link>
+                    <Link to="manage-users" className="text-md w-full bg-white hover:bg-main hover:text-second px-6 py-4 inline-block font-bold">
+                        Manage Users
+                    </Link>
                 </div>
             </div>
+        </div>
     );
 };
 
