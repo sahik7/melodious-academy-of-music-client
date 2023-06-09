@@ -7,7 +7,6 @@ const ManageUsers = () => {
   const { data: users = [], refetch } = useQuery(["users"], async () => {
     const res = await instance("/users");
     console.log(res.data)
-    refetch()
     return res.data;
   });
 
@@ -61,7 +60,7 @@ const ManageUsers = () => {
 
   return (
     <div className="w-9/12">
-      <table className="border-collapse w-full mt-10">
+      <table className="border-collapse w-full">
         <thead>
           <tr className="bg-second/50 text-left">
             <th className="table-head rounded-tl-md">No</th>

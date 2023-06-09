@@ -20,3 +20,7 @@ body{
 .table-head{
     @apply text-sm p-4 py-6;
 }
+
+.font-avail{
+    font-family: 'Asul', sans-serif;
+}
