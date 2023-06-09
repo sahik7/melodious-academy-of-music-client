@@ -6,14 +6,15 @@ import { AiOutlineVideoCameraAdd } from 'react-icons/ai';
 import { BsCollectionFill } from 'react-icons/bs';
 import { ImDownload } from 'react-icons/im';
 import { MdPayments } from 'react-icons/md';
+import useAdminVerify from '../../hooks/useAdminVerify';
 
 const Sidebar = () => {
     const location = useLocation();
+    // const {validAdmin} = useAdminVerify();
     const userRole = "admin";
 
     // Function to check if a link is active based on the current location
     const isLinkActive = (pathname) => {
-        console.log(location)
         return location.pathname === pathname;
     };
 

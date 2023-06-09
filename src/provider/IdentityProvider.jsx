@@ -41,10 +41,11 @@ export default function IdentityProvider({ children }) {
         const unsubscribe = onAuthStateChanged(authentication, (userNow) => {
             setUser(userNow);
             // set jwt
-            {userNow && axios.post("http://localhost:5000/token", {email:userNow.email})
-            .then(data => {
-                console.log(data)
-            })}
+            {
+                userNow ? axios.post("http://localhost:5000/token", { email: userNow.email }).then(data => {
+                    localStorage.setItem("private-token", data.data.token)
+                }) : localStorage.removeItem("private-token")
+            }
             setLoading(false)
         });
 

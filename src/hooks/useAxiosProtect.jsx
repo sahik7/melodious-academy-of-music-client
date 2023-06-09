@@ -1,30 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IdentityContext } from '../provider/IdentityProvider';
+import axios from 'axios';
 
-const createAxiosProtect = () => {
-    const instance = axios.create({
-        baseURL: 'https://http://localhost:5000',
-    });
-
-    instance.interceptors.request.use((config) => {
-        const token = localStorage.getItem('access-token');
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-    });
-
-    return instance;
-}
 
 const useAxiosProtect = () => {
     const { logOut } = useContext(IdentityContext);
     const navigate = useNavigate();
-    const axiosProtect = createAxiosProtect();
+    const instance = axios.create({ baseURL: 'http://localhost:5000' })
 
     useEffect(() => {
-        const responseInterceptor = axiosProtect.interceptors.response.use(
+        instance.interceptors.request.use((config) => {
+            const token = localStorage.getItem('private-token');
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+            return config;
+        });
+        instance.interceptors.response.use(
             (response) => response,
             async (error) => {
                 if (error.response && (error.response.status === 401 || error.response.status === 403)) {
@@ -34,13 +27,9 @@ const useAxiosProtect = () => {
                 return Promise.reject(error);
             }
         );
+    }, [logOut, navigate, instance]);
 
-        return () => {
-            axiosProtect.interceptors.response.eject(responseInterceptor);
-        };
-    }, [axiosProtect, logOut, navigate]);
-
-    return [axiosProtect];
+    return { instance };
 };
 
 

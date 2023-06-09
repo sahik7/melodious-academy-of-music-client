@@ -1,10 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import useAxiosProtect from '../../../hooks/useAxiosProtect';
 
 const ManageUsers = () => {
+    const {instance} = useAxiosProtect()
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/users");
-    return res.json();
+    const res = await instance("/users");
+    console.log(res.data)
+    refetch()
+    return res.data;
   });
 
   const [disabledAdminButtons, setDisabledAdminButtons] = useState([]);
