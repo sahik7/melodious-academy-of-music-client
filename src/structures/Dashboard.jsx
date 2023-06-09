@@ -9,7 +9,7 @@ const Dashboard = () => {
     return (
         <>
             <Navbar/>
-                <div className='flex w-11/12 mx-auto items-center justify-between'>
+                <div className='flex w-11/12 mt-20 mx-auto items-start justify-between'>
             <Sidebar/>
             <Outlet/>
                 </div>

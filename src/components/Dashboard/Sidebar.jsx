@@ -20,7 +20,7 @@ const Sidebar = () => {
     return (
         <div className="w-72">
             {/* Admin Dashboard */}
-            {userRole === 'admin' && <><h1 className='text-2xl text-black mt-10 font-bold'>Admin Dashboard</h1>
+            {userRole === 'admin' && <><h1 className='text-2xl text-black -mt-12 font-bold'>Admin Dashboard</h1>
             <div className="border-2 p-8 my-5 rounded-md border-second">
                 <div className="space-y-2">
                     <div className={`rounded ${isLinkActive('/dashboard/manage-classes') ? 'bg-main text-second' : ''}`}>
