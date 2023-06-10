@@ -102,33 +102,30 @@ const Navbar = () => {
 
                 {/* Mobile Menu */}
                 {showMenu && (
-                    <div className="md:hidden bg-main absolute right-12 top-20 w-1/3 rounded py-2">
+                    <div className="md:hidden z-10 bg-main absolute right-12 top-20 w-1/3 rounded py-2 pl-4 border-2 border-second">
                         <NavLink
                             to="/"
-                            className={`block text-second lg:ml-3 hover:text-main py-1 ${onClickRoute('/') ? 'text-main bg-second' : ''
-                                }`}
+                            className="block text-second"
+                                
                         >
                             Home
                         </NavLink>
                         <NavLink
                             to="/instructors"
-                            className={`text-black hover:text-main ${onClickRoute('/instructors') ? 'text-main' : ''
-                                }`}
+                            className="block text-second"
                         >
                             instructors
                         </NavLink>
                         <NavLink
                             to="/classes"
-                            className={`text-black hover:text-main ${onClickRoute('/classes') ? 'text-main' : ''
-                                }`}
+                            className="block text-second"
                         >
                             classes
                         </NavLink>
                         {user && (
                             <NavLink
                                 to="/dashboard"
-                                className={`text-black hover:text-main ${onClickRoute('/dashboard') ? 'text-main' : ''
-                                    }`}
+                                className="block text-second"
                             >
                                 dashboard
                             </NavLink>
@@ -136,7 +133,7 @@ const Navbar = () => {
                         {!user && (
                             <Link
                                 to="/login"
-                                className="block text-second lg:ml-3 hover:text-main py-1"
+                                className="block text-second"
                             >
                                 Login
                             </Link>
