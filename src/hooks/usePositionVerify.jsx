@@ -9,7 +9,7 @@ const usePositionVerify = () => {
     const { data: validPosition, isPositionLoading } = useQuery({
         queryKey: ["validPosition", user?.email], queryFn: async () => {
             const response = await instance.get(`/users/${user.email}`)
-            console.log(response)
+            console.log(response.data.position)
             return response.data.position;
         }
     })

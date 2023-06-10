@@ -4,23 +4,24 @@ import { useContext } from "react";
 import { IdentityContext } from "../provider/IdentityProvider";
 
 
-const AdminRoute = ({ children }) => {
+const StudentRoute = ({ children }) => {
     const { user, loading } = useContext(IdentityContext);
     const { validPosition,isPositionLoading } = usePositionVerify();
     const location = useLocation();
-
+    
     if (loading || isPositionLoading) {
-        return <progress className="progress w-56"></progress>
+        return <p>Loading...</p>
     }
-
+    
     if (user && validPosition) {
-    if (validPosition === "admin") {
+        if (validPosition === "student") {
+        console.log(user, validPosition)
             return children;
         }
     }
 
     
-    return <Navigate to="/" state={{ from: location }} replace></Navigate>
+    return <Navigate to="/login" state={{ from: location }} replace></Navigate>
 };
 
-export default AdminRoute;
+export default StudentRoute;

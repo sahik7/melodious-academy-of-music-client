@@ -12,6 +12,13 @@ import AllClasses from "../pages/AllClasses/AllClasses";
 import AllInstructors from "../pages/AllInstructors/AllInstructors";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminRoute from "./AdminRoute";
+import AddingClass from "../components/Dashboard/Instructor/AddingClass";
+import InstructorRoute from "./InstructorRoute";
+import ManageClasses from "../components/Dashboard/Admin/ManageClasses";
+import MyClasses from "../components/Dashboard/Instructor/MyClasses";
+import SelectedClass from "../components/Dashboard/Student/SelectedClass";
+import EnrolledClass from "../components/Dashboard/Student/EnrolledClass";
+import StudentRoute from "./StudentRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -47,12 +54,28 @@ export const router = createBrowserRouter([
     children:[
       {
         path: "manage-classes",
-    element: <p>hello this is classes</p>,
+    element: <AdminRoute><ManageClasses/></AdminRoute>,
       },
       {
         path: "manage-users",
     element: <AdminRoute><ManageUsers/></AdminRoute>,
-      }
+      },
+      {
+        path: "adding-class",
+    element: <InstructorRoute><AddingClass/></InstructorRoute>,
+      },
+      {
+        path: "my-classes",
+    element: <InstructorRoute><MyClasses/></InstructorRoute>,
+      },
+      {
+        path: "selected-class",
+    element: <StudentRoute><SelectedClass/></StudentRoute>,
+      },
+      {
+        path: "enrolled-classes",
+    element: <StudentRoute><EnrolledClass/></StudentRoute>,
+      },
     ]
   }
 ]);

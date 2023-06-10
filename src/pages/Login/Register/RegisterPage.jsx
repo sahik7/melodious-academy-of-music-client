@@ -14,7 +14,6 @@ const RegisterPage = () => {
   const { register, handleSubmit, reset } = useForm();
   const location = useLocation();
   const navigate = useNavigate();
-  const url = `/users/${email}`;
 
   const from = location.state?.from?.pathname || '/';
 

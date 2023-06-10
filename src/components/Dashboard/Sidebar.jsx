@@ -44,17 +44,17 @@ const Sidebar = () => {
       {validPosition === 'student' && <><h1 className='text-2xl text-black mt-10 font-bold'>Student Dashboard</h1>
             <div className="border-2 p-8 my-5 rounded-md h-full border-second">
                 <div className="space-y-2">
-                    <div className={`rounded ${isLinkActive('/dashboard/manage-classes') ? 'bg-main text-second' : ''}`}>
+                    <div className={`rounded ${isLinkActive('/dashboard/selected-class') ? 'bg-main text-second' : ''}`}>
                         <Link
-                            to="manage-classes"
+                            to="selected-class"
                             className={`flex items-center w-full rounded hover:bg-main hover:text-second py-4 font-bold`}
                         >
                            <ImDownload className='mx-3' size={22}/>My Selected Classes
                         </Link>
                     </div>
-                    <div className={`rounded ${isLinkActive('/dashboard/manage-users') ? 'bg-main text-second' : ''}`}>
+                    <div className={`rounded ${isLinkActive('/dashboard/enrolled-classes') ? 'bg-main text-second' : ''}`}>
                     <Link
-                            to="manage-users"
+                            to="enrolled-classes"
                             className={`flex items-center w-full rounded hover:bg-main hover:text-second  py-4 font-bold`}
                         >
                             <MdPayments className='mx-4' size={22}/>My Enrolled Classes
@@ -67,17 +67,17 @@ const Sidebar = () => {
       {validPosition === 'instructor' && <><h1 className='text-2xl text-black mt-10 font-bold'>Instructor Dashboard</h1>
             <div className="border-2 p-8 my-5 rounded-md h-full border-second">
                 <div className="space-y-2">
-                    <div className={`rounded ${isLinkActive('/dashboard/manage-classes') ? 'bg-main text-second' : ''}`}>
+                    <div className={`rounded ${isLinkActive('/dashboard/my-classes') ? 'bg-main text-second' : ''}`}>
                         <Link
-                            to="manage-classes"
+                            to="my-classes"
                             className={`flex items-center w-full rounded hover:bg-main hover:text-second  py-4 font-bold`}
                         >
                            <BsCollectionFill className='mx-4' size={22}/>My Classes
                         </Link>
                     </div>
-                    <div className={`rounded ${isLinkActive('/dashboard/manage-users') ? 'bg-main text-second' : ''}`}>
+                    <div className={`rounded ${isLinkActive('/dashboard/adding-class') ? 'bg-main text-second' : ''}`}>
                     <Link
-                            to="manage-users"
+                            to="adding-class"
                             className={`flex items-center w-full rounded hover:bg-main hover:text-second  py-4 font-bold`}
                         >
                             <AiOutlineVideoCameraAdd  className='mx-4' size={22}/>Add a Class

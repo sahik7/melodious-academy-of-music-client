@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { IdentityContext } from "../provider/IdentityProvider";
 
 
-const AdminRoute = ({ children }) => {
+const InstructorRoute = ({ children }) => {
     const { user, loading } = useContext(IdentityContext);
     const { validPosition,isPositionLoading } = usePositionVerify();
     const location = useLocation();
@@ -14,13 +14,13 @@ const AdminRoute = ({ children }) => {
     }
 
     if (user && validPosition) {
-    if (validPosition === "admin") {
+    if (validPosition === "instructor") {
             return children;
         }
     }
 
     
-    return <Navigate to="/" state={{ from: location }} replace></Navigate>
+    return <Navigate to="/login" state={{ from: location }} replace></Navigate>
 };
 
-export default AdminRoute;
+export default InstructorRoute;
