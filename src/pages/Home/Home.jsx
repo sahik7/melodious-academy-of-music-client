@@ -2,6 +2,7 @@ import React from 'react';
 import Carousel from './Slider/Carousal';
 import PopularClasses from './PopularClasses/PopularClasses';
 import Holder from '../../components/Holder';
+import PopularInstructors from './PopularInstructors/PopularInstructors';
 
 const Home = () => {
     return (
@@ -9,6 +10,7 @@ const Home = () => {
             <Carousel/>
             <Holder>
             <PopularClasses/>
+            <PopularInstructors/>
             </Holder>
         </div>
     );

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import useAxiosProtect from '../../../hooks/useAxiosProtect';
 import PopularClass from './PopularClass';
+import { Fade, Slide } from 'react-awesome-reveal';
 
 const PopularClasses = () => {
     const { instance } = useAxiosProtect()
@@ -16,7 +17,7 @@ const PopularClasses = () => {
     console.log(classData)
     return (
         <>
-        <div className="group w-1/2 mx-auto"><h1 className="text-5xl text-center mt-32 group-hover:text-second rounded group-hover:bg-main py-2 duration-300  text-main font-avail">Popular Classes</h1>
+        <div className="group w-1/2 mx-auto"><Fade delay={1000}><h1 className="text-5xl text-center mt-32 group-hover:text-second rounded group-hover:bg-main py-2 duration-300  text-main font-avail">Popular Classes</h1></Fade>
         <hr  className="border-2 mt-6 border-second rounded-full  w-4/12 mx-auto"/></div>
         <div className='grid md:grid-cols-3 grid-cols-1 gap-10 my-32'>
             

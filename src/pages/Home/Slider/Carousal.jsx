@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Fade, Slide } from 'react-awesome-reveal';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 const Carousel = () => {
@@ -55,12 +56,14 @@ const Carousel = () => {
           >
             <img src={slide.image} alt={slide.title} className="w-full object-cover h-[500px]" />
             <div className="carousel-content absolute w-10/12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+            <Slide>
               <h2
                 className="lg:text-5xl text-2xl font-avail font-bold mb-4 lg:w-1/2 lg:mx-0 mx-auto"
                 style={{ color: slide.titleColor }}
               >
                 {slide.title}
               </h2>
+      </Slide>
               <p className="text-gray-200 lg:w-1/2" style={{ color: slide.textColor }}>
                 {slide.text}
               </p>
