@@ -20,6 +20,7 @@ const RegisterPage = () => {
 
   const handleEmailPasswordRegister = async (registerInfo) => {
     const { email, password, confirmPassword, name, photoURL } = registerInfo;
+    const url = `/users/${email}`;
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
       return;
@@ -53,7 +54,7 @@ const RegisterPage = () => {
       }
     } catch (error) {
       toast.error('Registration failed');
-      console.log('Registration error:', error);
+      toast.info(error.code.split("auth/"));
     }
   };
 
