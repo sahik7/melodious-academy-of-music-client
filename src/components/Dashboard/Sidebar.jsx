@@ -10,7 +10,7 @@ import useAdminVerify from '../../hooks/useAdminVerify';
 
 const Sidebar = () => {
     const location = useLocation();
-    // const {validAdmin} = useAdminVerify();
+    const {validAdmin} = useAdminVerify();
     const userRole = "admin";
 
     // Function to check if a link is active based on the current location

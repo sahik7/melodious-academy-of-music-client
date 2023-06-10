@@ -13,7 +13,7 @@ const useAdminVerify = () => {
             return response.data.admin;
         }
     })
-    return { validAdmin, isLoading };
+return { validAdmin, isLoading };
 };
 
 export default useAdminVerify;

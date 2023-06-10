@@ -4,14 +4,17 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IdentityContext } from '../../../provider/IdentityProvider';
 import { toast } from 'react-hot-toast';
+import useAxiosProtect from '../../../hooks/useAxiosProtect';
 
 const RegisterPage = () => {
   const { googleSignIn, emailPasswordRegistration, updateNameAndImage } = useContext(IdentityContext)
+  const { instance } = useAxiosProtect()
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const location = useLocation();
   const navigate = useNavigate();
+  const url = `/users/${email}`;
 
   const from = location.state?.from?.pathname || '/';
 
@@ -37,9 +40,13 @@ const RegisterPage = () => {
       try {
         const result = await updateNameAndImage(name, photoURL);
         toast.success('Name and image updated successfully');
-        fetch(`http://localhost:5000/users/${email}`, {method: "PUT",headers:{"content-type": "application/json"},body: JSON.stringify({name,email})}).then(res => res.json()).then(data => {
-          console.log(data)
-        })
+        instance
+          .put(url, { name, email })
+          .then(() => {
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } catch (error) {
         toast.error('Failed to update name and image');
         console.log('Update error:', error);
@@ -55,6 +62,14 @@ const RegisterPage = () => {
       const result = await googleSignIn();
       if (result.user) {
         toast.success("Login Successfully");
+        console.log(result.user)
+        instance
+          .put(url, { name:result.user.displayName, email:result.user.email })
+          .then(() => {
+          })
+          .catch((error) => {
+            console.error(error);
+          });
         reset()
         navigate(from, { replace: true })
       }

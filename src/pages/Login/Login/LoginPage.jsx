@@ -30,6 +30,7 @@ const LoginPage = () => {
     try {
       const result = await googleSignIn();
       if(result.user){
+        result.user
         toast.success("Login Successfully");
         reset()
         navigate(from, { replace: true });
