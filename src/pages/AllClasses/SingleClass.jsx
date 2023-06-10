@@ -16,7 +16,10 @@ const SingleClass = ({ data }) => {
             const myClassData = {
                 id: _id,
                 email: user.email,
-                titleName: className
+                titleName: className,
+                image:image,
+                price:price,
+
             }
             fetch(`http://localhost:5000/my-classes/${_id}`, {method:"PUT", headers: {"content-type" : "application/json"}, body:JSON.stringify(myClassData)}).then(response => response.json()).then(()=> {
                 toast.success("Successfully Selected")
