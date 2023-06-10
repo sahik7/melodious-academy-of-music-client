@@ -62,7 +62,7 @@ const RegisterPage = () => {
       const result = await googleSignIn();
       if (result.user) {
         toast.success("Login Successfully");
-        console.log(result.user)
+        const url = `/users/${result.user.email}`;
         instance
           .put(url, { name:result.user.displayName, email:result.user.email })
           .then(() => {
