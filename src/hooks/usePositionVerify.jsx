@@ -3,17 +3,17 @@ import { IdentityContext } from '../provider/IdentityProvider';
 import useAxiosProtect from './useAxiosProtect';
 import { useQuery } from '@tanstack/react-query';
 
-const useAdminVerify = () => {
+const usePositionVerify = () => {
     const { user } = useContext(IdentityContext)
     const { instance } = useAxiosProtect()
-    const { data: validAdmin, isLoading } = useQuery({
-        queryKey: ["validAdmin", user?.email], queryFn: async () => {
+    const { data: validPosition, isPositionLoading } = useQuery({
+        queryKey: ["validPosition", user?.email], queryFn: async () => {
             const response = await instance.get(`/users/${user.email}`)
-            console.log("is admin")
-            return response.data.admin;
+            console.log(response)
+            return response.data.position;
         }
     })
-return { validAdmin, isLoading };
+return { validPosition, isPositionLoading };
 };
 
-export default useAdminVerify;
+export default usePositionVerify;

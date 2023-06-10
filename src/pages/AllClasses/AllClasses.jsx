@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Holder from '../../components/Holder';
-import ClassItem from './classItem';
+import SingleClass from './SingleClass';
 
 
 const AllClasses = () => {
@@ -19,7 +19,7 @@ const AllClasses = () => {
             <Holder>
                 <h1 className="text-6xl text-center font-bold ">Enhance your skills through our interactive classes</h1>
                 <div className="grid grid-cols-3 mt-20 gap-14">
-                    {allClasses.map(classItem => <ClassItem key={classItem._id} classItem={classItem} />)}
+                    {allClasses.map(data => <SingleClass data={data}/>)}
                 </div>
 
             </Holder>

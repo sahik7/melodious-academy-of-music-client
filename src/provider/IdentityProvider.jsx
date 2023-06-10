@@ -7,9 +7,9 @@ export const IdentityContext = createContext()
 const authentication = getAuth(app);
 
 export default function IdentityProvider({ children }) {
+    const [user, setUser] = useState(null)
     const providerForGoogle = new GoogleAuthProvider();
     const [loading, setLoading] = useState(true)
-    const [user, setUser] = useState(null)
 
     const emailPasswordRegistration = (email, password) => {
         setLoading(true);
@@ -33,7 +33,6 @@ export default function IdentityProvider({ children }) {
     };
 
     const logOut = () => {
-        setLoading(true);
         return signOut(authentication);
     };
 
@@ -41,16 +40,28 @@ export default function IdentityProvider({ children }) {
         const unsubscribe = onAuthStateChanged(authentication, (userNow) => {
             setUser(userNow);
             // set jwt
-            {
-                userNow ? axios.post("http://localhost:5000/token", { email: userNow.email }).then(data => {
-                    localStorage.setItem("private-token", data.data.token)
-                }) : localStorage.removeItem("private-token")
+            if (userNow) {
+                axios.post("http://localhost:5000/token", { email: userNow.email }).then(data => {
+                    if (data.data) {
+                        localStorage.setItem("private-token", data?.data?.token)
+                        setLoading(false)
+                    }
+                    else {
+                        localStorage.removeItem("private-token")
+                        setLoading(false)
+                    }
+                })
             }
-            setLoading(false)
+            // {
+            //     userNow ? axios.post("http://localhost:5000/token", { email: userNow.email }).then(data => {
+            //         localStorage.setItem("private-token", data?.data.token)
+            //     }) : localStorage.removeItem("private-token")
+            // }
+
         });
 
         return () => {
-            unsubscribe();
+            return unsubscribe();
         };
     }, []);
 
@@ -62,7 +73,7 @@ export default function IdentityProvider({ children }) {
 
 
 
-    return <IdentityContext.Provider value={{ user, updateNameAndImage, googleSignIn, logOut, emailPasswordSignIn, emailPasswordRegistration }}>
+    return <IdentityContext.Provider value={{ user, updateNameAndImage, googleSignIn, logOut, emailPasswordSignIn, emailPasswordRegistration,loading }}>
         {children}
     </IdentityContext.Provider>
 };

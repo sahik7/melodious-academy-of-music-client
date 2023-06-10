@@ -6,14 +6,11 @@ import { AiOutlineVideoCameraAdd } from 'react-icons/ai';
 import { BsCollectionFill } from 'react-icons/bs';
 import { ImDownload } from 'react-icons/im';
 import { MdPayments } from 'react-icons/md';
-import useAdminVerify from '../../hooks/useAdminVerify';
+import usePositionVerify from '../../hooks/usePositionVerify';
 
 const Sidebar = () => {
     const location = useLocation();
-    const {validAdmin} = useAdminVerify();
-    const userRole = "admin";
-
-    // Function to check if a link is active based on the current location
+    const {validPosition} = usePositionVerify();
     const isLinkActive = (pathname) => {
         return location.pathname === pathname;
     };
@@ -21,7 +18,7 @@ const Sidebar = () => {
     return (
         <div className="w-72">
             {/* Admin Dashboard */}
-            {userRole === 'admin' && <><h1 className='text-2xl text-black -mt-12 font-bold'>Admin Dashboard</h1>
+            {validPosition === 'admin' && <><h1 className='text-2xl text-black -mt-12 font-bold'>Admin Dashboard</h1>
             <div className="border-2 p-8 my-5 rounded-md border-second">
                 <div className="space-y-2">
                     <div className={`rounded ${isLinkActive('/dashboard/manage-classes') ? 'bg-main text-second' : ''}`}>
@@ -44,7 +41,7 @@ const Sidebar = () => {
                 </div>
             </div></>}
             {/* Student Dashboard */}
-      {userRole === 'student' && <><h1 className='text-2xl text-black mt-10 font-bold'>Student Dashboard</h1>
+      {validPosition === 'student' && <><h1 className='text-2xl text-black mt-10 font-bold'>Student Dashboard</h1>
             <div className="border-2 p-8 my-5 rounded-md h-full border-second">
                 <div className="space-y-2">
                     <div className={`rounded ${isLinkActive('/dashboard/manage-classes') ? 'bg-main text-second' : ''}`}>
@@ -67,7 +64,7 @@ const Sidebar = () => {
                 </div>
             </div></>}
             {/* Instructor Dashboard */}
-      {userRole === 'instructor' && <><h1 className='text-2xl text-black mt-10 font-bold'>Instructor Dashboard</h1>
+      {validPosition === 'instructor' && <><h1 className='text-2xl text-black mt-10 font-bold'>Instructor Dashboard</h1>
             <div className="border-2 p-8 my-5 rounded-md h-full border-second">
                 <div className="space-y-2">
                     <div className={`rounded ${isLinkActive('/dashboard/manage-classes') ? 'bg-main text-second' : ''}`}>

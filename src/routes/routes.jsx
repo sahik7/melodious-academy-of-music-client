@@ -9,6 +9,9 @@ import Home from "../pages/Home/Home";
 import Dashboard from "../structures/Dashboard";
 import ManageUsers from "../components/Dashboard/Admin/ManageUsers";
 import AllClasses from "../pages/AllClasses/AllClasses";
+import AllInstructors from "../pages/AllInstructors/AllInstructors";
+import ProtectedRoute from "./ProtectedRoute";
+import AdminRoute from "./AdminRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -25,7 +28,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/instructors",
-    element: <p>this is instructors</p>,
+    element: <AllInstructors/>,
       },
       {
         path: "/login",
@@ -39,7 +42,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard/>,
+    element: <ProtectedRoute><Dashboard/></ProtectedRoute>,
     errorElement:<NotFoundPage/>,
     children:[
       {
@@ -48,7 +51,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "manage-users",
-    element: <ManageUsers/>,
+    element: <AdminRoute><ManageUsers/></AdminRoute>,
       }
     ]
   }
