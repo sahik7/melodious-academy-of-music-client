@@ -19,7 +19,7 @@ const AllClasses = () => {
             <Holder>
                 <h1 className="text-6xl text-center font-bold ">Enhance your skills through our interactive classes</h1>
                 <div className="grid grid-cols-3 mt-20 gap-14">
-                    {allClasses.map(data => <SingleClass data={data}/>)}
+                    {allClasses.map(data => <SingleClass key={data._id} data={data}/>)}
                 </div>
 
             </Holder>
