@@ -1,17 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { RiFeedbackLine, RiEdit2Line } from 'react-icons/ri';
 import { IdentityContext } from '../../../provider/IdentityProvider';
 import useAxiosProtect from '../../../hooks/useAxiosProtect';
 
 const MyClasses = () => {
-    const {user} = useContext(IdentityContext)
-    const {instance} = useAxiosProtect()
-    const { data: instructorClasses = [], refetch } = useQuery(["instructor-classes"], async () => {
-        const res = await instance(`/classes?email=${user.email}`);
-        console.log(res.data)
-        return res.data;
-    });
+  const { user } = useContext(IdentityContext)
+  const { instance } = useAxiosProtect()
+  const [isOpen, setIsOpen] = useState(false);
+  const { data: instructorClasses = [], refetch } = useQuery(["instructor-classes"], async () => {
+    const res = await instance(`/classes?email=${user.email}`);
+    console.log(res.data)
+    return res.data;
+  });
+
+  console.log("instructor classes", instructorClasses)
+
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
 
   const handleDeleteButton = (classId) => {
     // Handle delete button click event
@@ -21,12 +34,22 @@ const MyClasses = () => {
     // Handle update button click event
   };
 
-  const handleFeedbackButtonClick = (classId) => {
-    // Handle feedback button click event
-  };
-
   return (
     <div className="w-9/12">
+      {isOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-black opacity-75 absolute inset-0"></div>
+          <div className="bg-white w-1/2 p-6 rounded-lg relative">
+            <span onClick={closeModal} className="absolute top-0 right-0 cursor-pointer p-4">
+              &times;
+            </span>
+            <div className="text-center p-5">
+              <p className=' text-3xl font-bold text-main'>Feedback</p>
+              <p className='w-2/3 mx-auto mt-10'>asdfaefawse ashufha r qrg uhv fd fhuh g hwubhu buh ufbh bhh buio;hsdfuhudfg</p>
+            </div>
+          </div>
+        </div>
+      )}
       <table className="border-collapse w-full">
         <thead>
           <tr className="bg-second/50 text-left">
@@ -61,10 +84,10 @@ const MyClasses = () => {
                   <RiEdit2Line />
                 </button>
               </td>
-              <td className="table-data text-center">
+              <td className={` ${item.status === "denied" ? "block table-data text-center" : "hidden table-data text-center"}`}>
                 <button
-                  className="bg-green-500 text-white font-bold text-sm py-1 px-3 rounded"
-                  onClick={() => handleFeedbackButtonClick(item._id)}
+                  className={`  ${item.status === "denied" ? "block bg-green-500 text-white font-bold text-sm py-1 px-3 rounded" : "hidden bg-green-500 text-white font-bold text-sm py-1 px-3 rounded"}`}
+                  onClick={openModal}
                 >
                   <RiFeedbackLine />
                 </button>
