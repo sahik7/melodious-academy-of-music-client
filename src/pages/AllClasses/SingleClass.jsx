@@ -5,13 +5,11 @@ import { toast } from 'react-hot-toast';
 import usePositionVerify from '../../hooks/usePositionVerify';
 
 const SingleClass = ({ data }) => {
-    const { user, loading } = useContext(IdentityContext)
+    const { user } = useContext(IdentityContext)
     const { validPosition } = usePositionVerify()
     const { _id, image, className, instructorName, price, availableSeats } = data;
-    if (loading) {
-        return <p>Loading...........</p>
-    }
     console.log(_id, user?.email)
+    console.log(availableSeats)
 
     const handleAddToMyClasses = () => {
         if (user) {
@@ -33,8 +31,9 @@ const SingleClass = ({ data }) => {
     }
 
 
+
     return (
-        <div className="border border-black h-[450px]">
+        <div className={`border border-black h-[450px] ${availableSeats || "red-shadow"}`}>
             <div className="h-[200px] border-b-4 border-b-black">
                 <img className="object-cover object-center h-full w-full" src={image} alt="" />
                 <div>
@@ -55,7 +54,20 @@ const SingleClass = ({ data }) => {
                         </div>
                     </div>
                     {/* Button part */}
-                    <button disabled={validPosition === 'admin' || validPosition === 'instructor'} onClick={handleAddToMyClasses} className={` ${validPosition === 'admin' || validPosition === 'instructor' ? 'bg-main/40 items-center border-2 px-4 py-2 mt-2 rounded flex' : 'p-4 mt-2 flex items-center border-2 btn-primary'}`}> Select <AiOutlineArrowRight className="ml-2" /></button>
+                    <button
+                        disabled={
+                            validPosition === 'admin' ||
+                            validPosition === 'instructor' ||
+                            availableSeats === "0"
+                        }
+                        onClick={handleAddToMyClasses}
+                        className={`${validPosition === 'admin' || validPosition === 'instructor' || !availableSeats
+                            ? 'bg-main/40 items-center border-2 px-4 py-2 mt-2 rounded flex'
+                            : ' px-4 py-2 mt-2 flex items-center border-2 btn-primary'
+                            } `}
+                    >
+                        Select <AiOutlineArrowRight className="ml-2" />
+                    </button>
                 </div>
             </div>
         </div>

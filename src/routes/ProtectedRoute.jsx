@@ -4,11 +4,11 @@ import { IdentityContext } from "../provider/IdentityProvider";
 import { RotateLoader } from "react-spinners";
 
 const ProtectedRoute = ({ children }) => {
-  const { user, isLoading } = useContext(IdentityContext);
+  const { user, loading } = useContext(IdentityContext);
   const locationData = useLocation();
-
-  if (isLoading) {
-    return <RotateLoader color="#36d7b7" />;
+  console.log({ user, loading })
+  if (loading) {
+    return <div className="w-4 mx-auto mt-80"><RotateLoader color="#ff4564" /></div>;
   }
 
   if (user) {

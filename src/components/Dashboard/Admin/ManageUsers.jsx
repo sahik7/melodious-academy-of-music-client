@@ -10,6 +10,8 @@ const ManageUsers = () => {
     return res.data;
   });
 
+  console.log(users)
+
   const [disabledAdminButtons, setDisabledAdminButtons] = useState([]);
   const [disabledInstructorButtons, setDisabledInstructorButtons] = useState([]);
 

@@ -3,10 +3,11 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { toast } from 'react-hot-toast';
 import useAxiosProtect from '../../../../hooks/useAxiosProtect';
 import { IdentityContext } from '../../../../provider/IdentityProvider';
+import { useQuery } from '@tanstack/react-query';
 
 
-const CheckoutForm = ({ price,selectId }) => {
-    console.log(price,selectId)
+const CheckoutForm = ({ price, selectId }) => {
+    console.log(price, selectId)
     const stripe = useStripe();
     const elements = useElements();
     const { user } = useContext(IdentityContext)
@@ -15,6 +16,14 @@ const CheckoutForm = ({ price,selectId }) => {
     const [inProcess, setInProcess] = useState("");
 
 
+
+    const { data: enrolled = {}, refetch } = useQuery(["enrolled-classes"], async () => {
+        const res = await instance(`/my-classes/${user?.email}?specificClass=${selectId}`);
+        console.log(res.data)
+        return res.data;
+    });
+
+    console.log(enrolled)
 
     useEffect(() => {
         instance.post("/create-payment-intent", { price })
@@ -64,14 +73,19 @@ const CheckoutForm = ({ price,selectId }) => {
         if (paymentIntent.status === "succeeded") {
 
             toast.success("Payment Complete Successfully")
-            instance.delete(`/my-classes/${selectId}`).then(data => console.log(data)).catch(error => console.log(error))
+            if (enrolled) {
+                instance.post("/enrolled", enrolled).then(data => {
+                    toast.success("enrolled success")
+                    instance.delete(`/my-classes/${selectId}`).then(data => console.log(data)).catch(error => console.log(error))
+                }).catch(error => console.log(error))
+            }
             const paymentId = paymentIntent.id
             const paymentInfo = {
                 email: user?.email,
-                paymentId, price,date:new Date()
+                paymentId, price, date: new Date()
             }
             instance.post("/payments", paymentInfo).then(data => {
-                if(data.data.insertedId){
+                if (data.data.insertedId) {
                     console.log("im ins")
                 }
             })

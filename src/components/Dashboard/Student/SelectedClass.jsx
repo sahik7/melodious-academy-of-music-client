@@ -13,8 +13,8 @@ const SelectedClass = () => {
         console.log(res.data)
         return res.data;
     });
-    console.log(myClasses)
     const handleDeleteButton = async (id) => {
+        console.log("delete button" ,id)
         const res = await instance.delete(`/my-classes/${id}`)  
         refetch();
     };
@@ -51,7 +51,7 @@ const SelectedClass = () => {
                             <td className="table-data">
                                 <button
                                     className={`bg-third/20 border-2 rounded border-third font-bold text-sm py-1 px-3`}
-                                    onClick={() => handleDeleteButton(item._id)}
+                                    onClick={() => handleDeleteButton(item.id)}
                                 >
                                     Delete
                                 </button>

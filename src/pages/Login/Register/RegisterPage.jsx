@@ -41,7 +41,7 @@ const RegisterPage = () => {
         const result = await updateNameAndImage(name, photoURL);
         toast.success('Name and image updated successfully');
         instance
-          .put(url, { name, email })
+          .put(url, { name, email, image: photoURL })
           .then(() => {
           })
           .catch((error) => {
@@ -53,7 +53,7 @@ const RegisterPage = () => {
       }
     } catch (error) {
       toast.error('Registration failed');
-      toast.info(error.code.split("auth/"));
+      toast.error(error.code.split("auth/"));
     }
   };
 
@@ -61,10 +61,11 @@ const RegisterPage = () => {
     try {
       const result = await googleSignIn();
       if (result.user) {
+        console.l
         toast.success("Login Successfully");
         const url = `/users/${result.user.email}`;
         instance
-          .put(url, { name:result.user.displayName, email:result.user.email })
+          .put(url, { name: result.user.displayName, email: result.user.email, image: result.user.photoURL })
           .then(() => {
           })
           .catch((error) => {

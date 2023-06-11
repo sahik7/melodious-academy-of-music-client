@@ -24,7 +24,7 @@ const Navbar = () => {
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
                         <NavLink to="/" className="text-white text-xl font-bold">
-                            <img src="logo-melodious.png" alt="" />
+                            <img src="https://i.ibb.co/fGnyKJP/logo-melodious.png" alt="" />
                         </NavLink>
                     </div>
 

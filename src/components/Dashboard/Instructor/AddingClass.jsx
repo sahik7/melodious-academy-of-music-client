@@ -17,7 +17,7 @@ const AddingClass = () => {
   };
 
   return (
-    <div className="border w-2/3 p-10 border-green-300">
+    <div className="border-2 w-3/4 p-14 border-second rounded-lg">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label htmlFor="className" className="block font-medium mb-1">
@@ -27,7 +27,7 @@ const AddingClass = () => {
             type="text"
             id="className"
             {...register('className', { required: 'Class Name is required' })}
-            className="border-gray-300 border-solid border px-4 py-2 w-full rounded-md"
+            className="input-field"
           />
           {errors.className && <p className="text-red-500">{errors.className.message}</p>}
         </div>
@@ -39,11 +39,12 @@ const AddingClass = () => {
             type="text"
             id="image"
             {...register('image', { required: 'Class Image is required' })}
-            className="border-gray-300 border-solid border px-4 py-2 w-full rounded-md"
+            className="input-field"
           />
           {errors.image && <p className="text-red-500">{errors.image.message}</p>}
         </div>
-        <div className="mb-4">
+        <div className="grid grid-cols-2 gap-x-4 mt-10">
+        <div className="">
           <label htmlFor="instructorName" className="block font-medium mb-1">
             Instructor Name
           </label>
@@ -51,12 +52,12 @@ const AddingClass = () => {
             type="text"
             id="instructorName"
             value={user?.displayName || ''}
-            className="border-gray-300 border-solid border px-4 py-2 w-full rounded-md"
+            className="input-field"
             readOnly
             {...register('instructorName')}
           />
         </div>
-        <div className="mb-4">
+        <div className="">
           <label htmlFor="instructorEmail" className="block font-medium mb-1">
             Instructor Email
           </label>
@@ -64,12 +65,14 @@ const AddingClass = () => {
             type="text"
             id="instructorEmail"
             value={user?.email || ''}
-            className="border-gray-300 border-solid border px-4 py-2 w-full rounded-md"
+            className="input-field"
             readOnly
             {...register('instructorEmail')}
           />
         </div>
-        <div className="mb-4">
+        </div>
+        <div className="grid grid-cols-2 gap-x-4 mt-10">
+        <div className="">
           <label htmlFor="availableSeats" className="block font-medium mb-1">
             Available Seats
           </label>
@@ -77,11 +80,11 @@ const AddingClass = () => {
             type="number"
             id="availableSeats"
             {...register('availableSeats', { required: 'Available Seats is required' })}
-            className="border-gray-300 border-solid border px-4 py-2 w-full rounded-md"
+            className="input-field"
           />
           {errors.availableSeats && <p className="text-red-500">{errors.availableSeats.message}</p>}
         </div>
-        <div className="mb-4">
+        <div className="">
           <label htmlFor="price" className="block font-medium mb-1">
             Price
           </label>
@@ -89,14 +92,15 @@ const AddingClass = () => {
             type="number"
             id="price"
             {...register('price', { required: 'Price is required' })}
-            className="border-gray-300 border-solid border px-4 py-2 w-full rounded-md"
+            className="input-field"
           />
           {errors.price && <p className="text-red-500">{errors.price.message}</p>}
         </div>
-        <div className="text-center">
+        </div>
+        <div className="text-center mt-10">
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            className="px-20 py-3 btn-primary"
           >
             Add Class
           </button>
