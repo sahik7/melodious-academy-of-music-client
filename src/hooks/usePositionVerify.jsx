@@ -8,7 +8,7 @@ const usePositionVerify = () => {
     const { instance } = useAxiosProtect()
     const { data: validPosition, isLoading:isPositionLoading } = useQuery({
         queryKey: ["validPosition", user?.email], queryFn: async () => {
-            const response = await instance.get(`/users/${user.email}`)
+            const response = await instance(`/users/${user.email}`)
             console.log(response.data.position)
             return response.data.position;
         }

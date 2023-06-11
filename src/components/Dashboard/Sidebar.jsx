@@ -60,6 +60,14 @@ const Sidebar = () => {
                             <MdPayments className='mx-4' size={22}/>My Enrolled Classes
                         </Link>
                     </div>
+                    <div className={`rounded ${isLinkActive('/dashboard/payment-history') ? 'bg-main text-second' : ''}`}>
+                    <Link
+                            to="payment-history"
+                            className={`flex items-center w-full rounded hover:bg-main hover:text-second  py-4 font-bold`}
+                        >
+                            <MdPayments className='mx-4' size={22}/>My Enrolled Classes
+                        </Link>
+                    </div>
 
                 </div>
             </div></>}
