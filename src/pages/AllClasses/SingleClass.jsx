@@ -19,6 +19,7 @@ const SingleClass = ({ data }) => {
                 titleName: className,
                 image: image,
                 price: price,
+                availableSeats:availableSeats
 
             }
             fetch(`http://localhost:5000/my-classes/${_id}`, { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(myClassData) }).then(response => response.json()).then(() => {

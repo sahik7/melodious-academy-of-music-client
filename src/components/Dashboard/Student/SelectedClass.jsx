@@ -33,6 +33,7 @@ const SelectedClass = () => {
                         <th className="table-head">Image</th>
                         <th className="table-head">Name</th>
                         <th className="table-head">Email</th>
+                        <th className="table-head">Seats</th>
                         <th className="table-head">Price</th>
                         <th className="table-head">Delete</th>
                         <th className="table-head rounded-tr-md">Payment</th>
@@ -47,6 +48,7 @@ const SelectedClass = () => {
                             </td>
                             <td className="table-data">{item?.titleName}</td>
                             <td className="table-data">{item?.email}</td>
+                            <td className="table-data">{item?.availableSeats}</td>
                             <td className="table-data">${item?.price}</td>
                             <td className="table-data">
                                 <button

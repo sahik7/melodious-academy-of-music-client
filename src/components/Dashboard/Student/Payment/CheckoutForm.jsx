@@ -73,6 +73,9 @@ const CheckoutForm = ({ price, selectId }) => {
         if (paymentIntent.status === "succeeded") {
 
             toast.success("Payment Complete Successfully")
+            instance.patch(`/classes/${selectId}`).then(data => {
+                toast.success("patch successfully done")
+            })
             if (enrolled) {
                 instance.post("/enrolled", enrolled).then(data => {
                     toast.success("enrolled success")
@@ -84,11 +87,7 @@ const CheckoutForm = ({ price, selectId }) => {
                 email: user?.email,
                 paymentId, price, date: new Date()
             }
-            instance.post("/payments", paymentInfo).then(data => {
-                if (data.data.insertedId) {
-                    console.log("im ins")
-                }
-            })
+            instance.post("/payments", paymentInfo).then(data => {})
         }
     }
 
