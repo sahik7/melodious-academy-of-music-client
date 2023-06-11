@@ -19,62 +19,67 @@ import MyClasses from "../components/Dashboard/Instructor/MyClasses";
 import SelectedClass from "../components/Dashboard/Student/SelectedClass";
 import EnrolledClass from "../components/Dashboard/Student/EnrolledClass";
 import StudentRoute from "./StudentRoute";
+import Payment from "../components/Dashboard/Student/Payment/Payment";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main/>,
-    errorElement:<NotFoundPage/>,
-    children:[
+    element: <Main />,
+    errorElement: <NotFoundPage />,
+    children: [
       {
         path: "/",
-    element: <Home/>,
+        element: <Home />,
       },
       {
         path: "/classes",
-    element: <AllClasses/>,
+        element: <AllClasses />,
       },
       {
         path: "/instructors",
-    element: <AllInstructors/>,
+        element: <AllInstructors />,
       },
       {
         path: "/login",
-    element: <LoginPage/>,
+        element: <LoginPage />,
       },
       {
         path: "/register",
-    element: <RegisterPage/>,
+        element: <RegisterPage />,
       }
     ]
   },
   {
     path: "dashboard",
-    element: <ProtectedRoute><Dashboard/></ProtectedRoute>,
-    errorElement:<NotFoundPage/>,
-    children:[
+    element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
+    errorElement: <NotFoundPage />,
+    children: [
       {
         path: "manage-classes",
-    element: <AdminRoute><ManageClasses/></AdminRoute>,
+        element: <AdminRoute><ManageClasses /></AdminRoute>,
       },
       {
         path: "manage-users",
-    element: <AdminRoute><ManageUsers/></AdminRoute>,
+        element: <AdminRoute><ManageUsers /></AdminRoute>,
       },
       {
         path: "adding-class",
-    element: <InstructorRoute><AddingClass/></InstructorRoute>,
+        element: <InstructorRoute><AddingClass /></InstructorRoute>,
       },
       {
         path: "my-classes",
-    element: <InstructorRoute><MyClasses/></InstructorRoute>,
+        element: <InstructorRoute><MyClasses /></InstructorRoute>,
       },
       {
         path: "selected-class",
-    element: <StudentRoute><SelectedClass/></StudentRoute>,
+        element: <StudentRoute><SelectedClass /></StudentRoute>,
       },
       {
         path: "enrolled-classes",
-    element: <StudentRoute><EnrolledClass/></StudentRoute>,
+        element: <StudentRoute><EnrolledClass /></StudentRoute>,
+      },
+      {
+        path: "payment/:price",
+        element: <StudentRoute><Payment /></StudentRoute>
       },
     ]
   }

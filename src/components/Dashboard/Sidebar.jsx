@@ -18,7 +18,7 @@ const Sidebar = () => {
     return (
         <div className="w-72">
             {/* Admin Dashboard */}
-            {validPosition === 'admin' && <><h1 className='text-2xl text-black -mt-12 font-bold'>Admin Dashboard</h1>
+            {validPosition === 'admin' && <><h1 className='text-2xl -mt-14 text-black font-bold'>Admin Dashboard</h1>
             <div className="border-2 p-8 my-5 rounded-md border-second">
                 <div className="space-y-2">
                     <div className={`rounded ${isLinkActive('/dashboard/manage-classes') ? 'bg-main text-second' : ''}`}>
@@ -41,7 +41,7 @@ const Sidebar = () => {
                 </div>
             </div></>}
             {/* Student Dashboard */}
-      {validPosition === 'student' && <><h1 className='text-2xl text-black mt-10 font-bold'>Student Dashboard</h1>
+      {validPosition === 'student' && <><h1 className='text-2xl text-black -mt-14 font-bold'>Student Dashboard</h1>
             <div className="border-2 p-8 my-5 rounded-md h-full border-second">
                 <div className="space-y-2">
                     <div className={`rounded ${isLinkActive('/dashboard/selected-class') ? 'bg-main text-second' : ''}`}>
