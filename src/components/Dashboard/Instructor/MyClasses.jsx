@@ -3,11 +3,15 @@ import React, { useContext, useState } from 'react';
 import { RiFeedbackLine, RiEdit2Line } from 'react-icons/ri';
 import { IdentityContext } from '../../../provider/IdentityProvider';
 import useAxiosProtect from '../../../hooks/useAxiosProtect';
+import { useForm } from 'react-hook-form';
 
 const MyClasses = () => {
   const { user } = useContext(IdentityContext)
   const { instance } = useAxiosProtect()
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenUpdate, setIsOpenUpdate] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const { data: instructorClasses = [], refetch } = useQuery(["instructor-classes"], async () => {
     const res = await instance(`/classes?email=${user.email}`);
     console.log(res.data)
@@ -20,15 +24,17 @@ const MyClasses = () => {
   const openModal = () => {
     setIsOpen(true);
   };
+  const openUpdateModal = () => {
+    setIsOpenUpdate(true);
+  };
+  const closeUpdateModal = () => {
+    setIsOpenUpdate(false);
+  };
 
   const closeModal = () => {
     setIsOpen(false);
   };
 
-
-  const handleDeleteButton = (classId) => {
-    // Handle delete button click event
-  };
 
   const handleUpdateButtonClick = (classId) => {
     // Handle update button click event
@@ -46,6 +52,24 @@ const MyClasses = () => {
             <div className="text-center p-5">
               <p className=' text-3xl font-bold text-main'>Feedback</p>
               <p className='w-2/3 mx-auto mt-10'>asdfaefawse ashufha r qrg uhv fd fhuh g hwubhu buh ufbh bhh buio;hsdfuhudfg</p>
+            </div>
+          </div>
+        </div>
+      )}
+      {isOpenUpdate && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-black opacity-75 absolute inset-0"></div>
+          <div className="bg-white w-1/2 p-6 rounded-lg relative">
+            <span onClick={closeUpdateModal} className="absolute top-0 right-0 cursor-pointer p-4">
+              &times;
+            </span>
+            <div className="text-center p-5">
+              <p className=' text-3xl font-bold text-main'>Update Information</p>
+              <form onSubmit={handleUpdateButtonClick} className="space-x-2">
+                <input className='border border-neutral-300 rounded py-2 px-4'type="number" name="seats" placeholder="Seats" id="" />
+                <input className='border border-neutral-300 rounded py-2 px-4'type="number" name="price" placeholder="Price" id="" />
+                <input type="submit" className="btn-primary py-2 px-4 mt-10 " value="Update "/>
+              </form>
             </div>
           </div>
         </div>
@@ -78,15 +102,15 @@ const MyClasses = () => {
               <td className="table-data text-center">{item.enrolledStudents}</td>
               <td className="table-data text-center">
                 <button
-                  className="bg-blue-500 text-white font-bold text-sm py-1 px-3 rounded"
-                  onClick={() => handleUpdateButtonClick(item._id)}
+                  className="btn-primary font-bold text-sm py-2 px-3 rounded"
+                  onClick={openUpdateModal}
                 >
                   <RiEdit2Line />
                 </button>
               </td>
-              <td className={` ${item.status === "denied" ? "block table-data text-center" : "hidden table-data text-center"}`}>
+              <td className={` ${item.status === "denied" ? "block table-data text-center" : "hidden"}`}>
                 <button
-                  className={`  ${item.status === "denied" ? "block bg-green-500 text-white font-bold text-sm py-1 px-3 rounded" : "hidden bg-green-500 text-white font-bold text-sm py-1 px-3 rounded"}`}
+                  className={`  ${item.status === "denied" ? "block btn-primary font-bold text-sm py-2 px-3 rounded" : "hidden"}`}
                   onClick={openModal}
                 >
                   <RiFeedbackLine />

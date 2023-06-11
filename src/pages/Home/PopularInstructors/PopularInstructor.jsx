@@ -1,6 +1,7 @@
 import React from 'react';
 
-const PopularInstructor = () => {
+const PopularInstructor = ({instructor}) => {
+    const {image} = instructor
     return (
         <div className='border rounded shadow-2xl'>
                 <div className='flex items-center justify-between p-2 bg-main text-second'>
@@ -12,7 +13,7 @@ const PopularInstructor = () => {
         <h3 className='font-bold text-lg'>+3y</h3>
                     </div>
                 </div>
-        <img src="1.png" alt="" />
+        <img src={image} alt="" />
             </div>
     );
 };
