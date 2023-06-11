@@ -15,9 +15,14 @@ const SelectedClass = () => {
     });
     console.log(myClasses)
     const handleDeleteButton = async (id) => {
-        const res = await instance.delete(`/my-classes/${id}`)
+        const res = await instance.delete(`/my-classes/${id}`)  
         refetch();
     };
+
+    const handlePayButtonClick = (productId, price) => {
+        navigate(`/dashboard/payment/${price}/${productId}`, { state: { price, productId } });
+    }
+    console.log(myClasses)
 
     return (
         <div className="w-9/12 ">
@@ -54,7 +59,7 @@ const SelectedClass = () => {
                             <td className="table-data">
                                 <button
                                     className={`bg-main/20 border-2 rounded border-main font-bold text-sm py-1 px-3`}
-                                    onClick={() => navigate(`/dashboard/payment/${item?.price}`)}
+                                    onClick={() => handlePayButtonClick(item?.price, item?.id)}
                                 >
                                     Pay
                                 </button>

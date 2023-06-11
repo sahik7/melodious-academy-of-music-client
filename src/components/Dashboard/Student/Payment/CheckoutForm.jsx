@@ -4,12 +4,15 @@ import { toast } from 'react-hot-toast';
 import useAxiosProtect from '../../../../hooks/useAxiosProtect';
 import { IdentityContext } from '../../../../provider/IdentityProvider';
 
-const CheckoutForm = ({ price }) => {
+
+const CheckoutForm = ({ price,selectId }) => {
+    console.log(price,selectId)
     const stripe = useStripe();
     const elements = useElements();
     const { user } = useContext(IdentityContext)
     const { instance } = useAxiosProtect()
     const [clientSecret, setClientSecret] = useState("");
+    const [inProcess, setInProcess] = useState("");
 
 
 
@@ -40,8 +43,9 @@ const CheckoutForm = ({ price }) => {
         if (error) {
             toast.error(error.message)
         } else {
-            console.log(paymentMethod)
+            // console.log(paymentMethod)
         }
+        setInProcess(true)
         console.log(card)
         const { paymentIntent, error: approveError } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
@@ -55,14 +59,30 @@ const CheckoutForm = ({ price }) => {
         if (approveError) {
             toast.error(approveError)
         }
-        console.log(paymentIntent)
+        setInProcess(false)
+        console.log("intent", paymentIntent)
+        if (paymentIntent.status === "succeeded") {
+
+            toast.success("Payment Complete Successfully")
+            instance.delete(`/my-classes/${selectId}`).then(data => console.log(data)).catch(error => console.log(error))
+            const paymentId = paymentIntent.id
+            const paymentInfo = {
+                email: user?.email,
+                paymentId, price,date:new Date()
+            }
+            instance.post("/payments", paymentInfo).then(data => {
+                if(data.data.insertedId){
+                    console.log("im ins")
+                }
+            })
+        }
     }
 
 
 
     return (
         <form onSubmit={handlePayment}>
-            <CardElement
+            <CardElement className="shadow-md p-4 border-2 border-second"
                 options={{
                     style: {
                         base: {
@@ -79,7 +99,7 @@ const CheckoutForm = ({ price }) => {
                 }}
             />
             <div className="text-center mt-20">
-                <button className="btn-primary py-1 px-3 w-1/3" type="submit" disabled={!stripe || !clientSecret}>
+                <button className="btn-primary py-2 px-3 w-1/3" type="submit" disabled={!stripe || !clientSecret || inProcess}>
                     Confirm Payment
                 </button>
 

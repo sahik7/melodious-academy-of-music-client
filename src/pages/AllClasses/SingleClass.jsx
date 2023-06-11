@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { IdentityContext } from '../../provider/IdentityProvider';
 import { toast } from 'react-hot-toast';
+import usePositionVerify from '../../hooks/usePositionVerify';
 
 const SingleClass = ({ data }) => {
-    const { user,loading } = useContext(IdentityContext)
+    const { user, loading } = useContext(IdentityContext)
+    const { validPosition } = usePositionVerify()
     const { _id, image, className, instructorName, price, availableSeats } = data;
-    if(loading){
+    if (loading) {
         return <p>Loading...........</p>
     }
     console.log(_id, user?.email)
@@ -17,15 +19,15 @@ const SingleClass = ({ data }) => {
                 id: _id,
                 email: user.email,
                 titleName: className,
-                image:image,
-                price:price,
+                image: image,
+                price: price,
 
             }
-            fetch(`http://localhost:5000/my-classes/${_id}`, {method:"PUT", headers: {"content-type" : "application/json"}, body:JSON.stringify(myClassData)}).then(response => response.json()).then(()=> {
+            fetch(`http://localhost:5000/my-classes/${_id}`, { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(myClassData) }).then(response => response.json()).then(() => {
                 toast.success("Successfully Selected")
             })
         }
-        else{
+        else {
             toast.error("Please Login First")
         }
     }
@@ -53,7 +55,7 @@ const SingleClass = ({ data }) => {
                         </div>
                     </div>
                     {/* Button part */}
-                    <button onClick={handleAddToMyClasses} className="p-4 mt-2 flex items-center border-2 btn-primary"> Select <AiOutlineArrowRight className="ml-2" /></button>
+                    <button disabled={validPosition === 'admin' || validPosition === 'instructor'} onClick={handleAddToMyClasses} className={` ${validPosition === 'admin' || validPosition === 'instructor' ? 'bg-main/40 items-center border-2 px-4 py-2 mt-2 rounded flex' : 'p-4 mt-2 flex items-center border-2 btn-primary'}`}> Select <AiOutlineArrowRight className="ml-2" /></button>
                 </div>
             </div>
         </div>

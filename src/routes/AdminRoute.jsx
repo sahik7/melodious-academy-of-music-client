@@ -8,7 +8,7 @@ const AdminRoute = ({ children }) => {
     const { user, loading } = useContext(IdentityContext);
     const { validPosition,isPositionLoading } = usePositionVerify();
     const location = useLocation();
-
+console.log(user,validPosition)
     if (loading || isPositionLoading) {
         return <progress className="progress w-56"></progress>
     }

@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 const usePositionVerify = () => {
     const { user } = useContext(IdentityContext)
     const { instance } = useAxiosProtect()
-    const { data: validPosition, isPositionLoading } = useQuery({
+    const { data: validPosition, isLoading:isPositionLoading } = useQuery({
         queryKey: ["validPosition", user?.email], queryFn: async () => {
             const response = await instance.get(`/users/${user.email}`)
             console.log(response.data.position)
