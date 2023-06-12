@@ -3,11 +3,13 @@ import { FaBars } from 'react-icons/fa';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import Holder from '../Holder';
 import { IdentityContext } from '../../provider/IdentityProvider';
+import { FaSun, FaMoon } from 'react-icons/fa';
 
-const Navbar = () => {
+const Navbar = ({handleDarkModeToggle, isDarkMode}) => {
     const [showMenu, setShowMenu] = useState(false);
     const { user, logOut } = useContext(IdentityContext);
     const location = useLocation();
+
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -30,6 +32,9 @@ const Navbar = () => {
 
                     <div className="hidden md:flex md:items-center md:space-x-6">
                         {/* Home NavLink */}
+                        <button className="toggle-button" onClick={handleDarkModeToggle}>
+                            {isDarkMode ? <FaMoon className="toggle-icon" /> : <FaSun className="toggle-icon" />}
+                        </button>
                         <NavLink
                             to="/"
                             onClick={() => onClickRoute('/')}
@@ -94,6 +99,7 @@ const Navbar = () => {
 
                     {/* Mobile Menu Button */}
                     <div className="md:hidden">
+                        
                         <button onClick={toggleMenu} className="text-white focus:outline-none">
                             <FaBars className="w-6 h-6 text-main" />
                         </button>
@@ -103,10 +109,13 @@ const Navbar = () => {
                 {/* Mobile Menu */}
                 {showMenu && (
                     <div className="md:hidden z-10 bg-main absolute right-12 top-20 w-1/3 rounded py-2 pl-4 border-2 border-second">
+                        <button className="toggle-button" onClick={handleDarkModeToggle}>
+                            {isDarkMode ? <FaMoon className="toggle-icon text-second" /> : <FaSun className="toggle-icon text-second" />}
+                        </button>
                         <NavLink
                             to="/"
                             className="block text-second"
-                                
+
                         >
                             Home
                         </NavLink>

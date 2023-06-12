@@ -24,7 +24,7 @@ const PopularClass = ({ eachClass }) => {
                     </div>
                 </div>
                 <div className="hidden group-hover:block ml-4">
-                    <Link to="#" className="inline-block btn-primary px-4 py-2 mt-2">Go to Class</Link>
+                    <Link to="/classes" className="inline-block btn-primary px-4 py-2 mt-2">Go to Class</Link>
                 </div>
             </div>
         </div>

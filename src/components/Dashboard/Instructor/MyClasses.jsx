@@ -38,12 +38,19 @@ const MyClasses = () => {
   };
 
 
-  const handleUpdateButtonClick = (e) => {
+  const handleUpdateButtonClick = async(e) => {
     e.preventDefault();
     const price = e.target.price.value
     const seats = e.target.seats.value
     console.log(itemId);
     console.log("seats", parseInt(seats), "price", parseInt(price))
+
+
+  
+    // const response = await instance.patch(`/classes/${itemId}?update=true`, {})
+
+  
+
     // Handle update button click event
   };
 
