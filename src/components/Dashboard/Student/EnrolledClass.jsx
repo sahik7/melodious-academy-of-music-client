@@ -11,7 +11,7 @@ const {instance} = useAxiosProtect()
         console.log(res.data)
         return res.data;
     });
-console.log(enrolledClasses)
+console.log("enrolled",enrolledClasses)
     return (
         <div className="w-9/12 ">
             <table className="border-collapse w-full">

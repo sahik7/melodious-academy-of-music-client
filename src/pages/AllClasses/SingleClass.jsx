@@ -34,7 +34,7 @@ const SingleClass = ({ data }) => {
 
 
     return (
-        <div className={`border border-black h-[450px] ${availableSeats || "red-shadow"}`}>
+        <div className={`border border-black h-[450px] ${availableSeats <= "0" && "red-shadow"}`}>
             <div className="h-[200px] border-b-4 border-b-black">
                 <img className="object-cover object-center h-full w-full" src={image} alt="" />
                 <div>
@@ -59,10 +59,10 @@ const SingleClass = ({ data }) => {
                         disabled={
                             validPosition === 'admin' ||
                             validPosition === 'instructor' ||
-                            availableSeats === "0"
+                            availableSeats <= "0"
                         }
                         onClick={handleAddToMyClasses}
-                        className={`${validPosition === 'admin' || validPosition === 'instructor' || !availableSeats
+                        className={`${validPosition === 'admin' || validPosition === 'instructor' || availableSeats <= "0"
                             ? 'bg-main/40 items-center border-2 px-4 py-2 mt-2 rounded flex'
                             : ' px-4 py-2 mt-2 flex items-center border-2 btn-primary'
                             } `}

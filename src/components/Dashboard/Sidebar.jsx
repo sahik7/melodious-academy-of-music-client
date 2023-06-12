@@ -5,7 +5,7 @@ import { FaUsers } from 'react-icons/fa';
 import { AiOutlineVideoCameraAdd } from 'react-icons/ai';
 import { BsCollectionFill } from 'react-icons/bs';
 import { ImDownload } from 'react-icons/im';
-import { MdPayments } from 'react-icons/md';
+import { MdPayments,MdOutlineHistory } from 'react-icons/md';
 import usePositionVerify from '../../hooks/usePositionVerify';
 
 const Sidebar = () => {
@@ -65,7 +65,7 @@ const Sidebar = () => {
                             to="payment-history"
                             className={`flex items-center w-full rounded hover:bg-main hover:text-second  py-4 font-bold`}
                         >
-                            <MdPayments className='mx-4' size={22}/>My Enrolled Classes
+                            <MdOutlineHistory className='mx-4' size={22}/>Payment History
                         </Link>
                     </div>
 
