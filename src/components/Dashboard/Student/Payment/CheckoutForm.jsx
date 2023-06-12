@@ -74,15 +74,15 @@ const CheckoutForm = ({ price, selectId }) => {
 
             toast.success("Payment Complete Successfully")
             instance.patch(`/classes/${selectId}?payment=successful`).then(data => {
-
+                if (enrolled) {
+                    instance.post("/enrolled", enrolled).then(data => {
+                        toast.success("enrolled success")
+                        instance.delete(`/my-classes/${selectId}`).then(data => console.log(data)).catch(error => console.log(error))
+                    }).catch(error => console.log(error))
+                }
                 toast.success("available seats successfully done")
             })
-            if (enrolled) {
-                instance.post("/enrolled", enrolled).then(data => {
-                    toast.success("enrolled success")
-                    instance.delete(`/my-classes/${selectId}`).then(data => console.log(data)).catch(error => console.log(error))
-                }).catch(error => console.log(error))
-            }
+            
             const paymentId = paymentIntent.id
             const paymentInfo = {
                 email: user?.email,
