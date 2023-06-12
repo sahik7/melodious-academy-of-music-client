@@ -3,30 +3,30 @@ import React, { useContext, useState } from 'react';
 import { RiFeedbackLine, RiEdit2Line } from 'react-icons/ri';
 import { IdentityContext } from '../../../provider/IdentityProvider';
 import useAxiosProtect from '../../../hooks/useAxiosProtect';
-import { useForm } from 'react-hook-form';
 
 const MyClasses = () => {
   const { user } = useContext(IdentityContext)
   const { instance } = useAxiosProtect()
   const [isOpen, setIsOpen] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [itemId, setItemId] = useState();
   const [isOpenUpdate, setIsOpenUpdate] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+
+
+
   const { data: instructorClasses = [], refetch } = useQuery(["instructor-classes"], async () => {
     const res = await instance(`/classes?email=${user.email}`);
-    console.log(res.data)
     return res.data;
   });
 
-  console.log("instructor classes", instructorClasses)
 
 
   const openModal = (feedback) => {
     setFeedback(feedback)
     setIsOpen(true);
   };
-  const openUpdateModal = () => {
+  const openUpdateModal = (id) => {
+    setItemId(id)
     setIsOpenUpdate(true);
   };
   const closeUpdateModal = () => {
@@ -38,7 +38,12 @@ const MyClasses = () => {
   };
 
 
-  const handleUpdateButtonClick = (classId) => {
+  const handleUpdateButtonClick = (e) => {
+    e.preventDefault();
+    const price = e.target.price.value
+    const seats = e.target.seats.value
+    console.log(itemId);
+    console.log("seats", parseInt(seats), "price", parseInt(price))
     // Handle update button click event
   };
 
@@ -68,9 +73,9 @@ const MyClasses = () => {
             <div className="text-center p-5">
               <p className=' text-3xl font-bold text-main'>Update Information</p>
               <form onSubmit={handleUpdateButtonClick} className="space-x-2">
-                <input className='border border-neutral-300 rounded py-2 px-4'type="number" name="seats" placeholder="Seats" id="" />
-                <input className='border border-neutral-300 rounded py-2 px-4'type="number" name="price" placeholder="Price" id="" />
-                <input type="submit" className="btn-primary py-2 px-4 mt-10 " value="Update "/>
+                <input className='border border-neutral-300 rounded py-2 px-4' type="number" name="seats" placeholder="Seats" id="" />
+                <input className='border border-neutral-300 rounded py-2 px-4' type="number" name="price" placeholder="Price" id="" />
+                <input type="submit" className="btn-primary py-2 px-4 mt-10 " value="Update " />
               </form>
             </div>
           </div>
@@ -104,15 +109,16 @@ const MyClasses = () => {
               <td className="table-data text-center">{item.enrolledStudents}</td>
               <td className="table-data text-center">
                 <button
-                  className="btn-primary font-bold text-sm py-2 px-3 rounded"
-                  onClick={openUpdateModal}
+                  className={` ${item.status === "denied" ? "bg-main/50 p-2" : "btn-primary font-bold text-sm py-2 px-3 rounded"}`}
+                  onClick={() => openUpdateModal(item._id)}
+                  disabled={item.status === "denied"}
                 >
                   <RiEdit2Line />
                 </button>
               </td>
-              <td className={` ${item.status !== "pending" ? "block table-data text-center" : "hidden"}`}>
+              <td className={` ${item.status === "denied" ? "block table-data text-center" : "hidden"}`}>
                 <button
-                  className={`  ${item.status !== "pending" ? "block table-data font-bold text-md py-2 px-3 rounded" : "hidden"}`}
+                  className={`  ${item.status === "denied" ? "block table-data font-bold text-md py-2 px-3 rounded" : "hidden"}`}
                   onClick={() => openModal(item.feedback)}
                 >
                   <RiFeedbackLine />

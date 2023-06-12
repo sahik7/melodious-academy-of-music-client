@@ -2,6 +2,7 @@ import { Navigate, useLocation } from "react-router";
 import usePositionVerify from "../hooks/usePositionVerify";
 import { useContext } from "react";
 import { IdentityContext } from "../provider/IdentityProvider";
+import { RotateLoader } from "react-spinners";
 
 
 const StudentRoute = ({ children }) => {
@@ -10,7 +11,7 @@ const StudentRoute = ({ children }) => {
     const location = useLocation();
     console.log(loading, isPositionLoading, validPosition, user)
     if (loading || isPositionLoading) {
-        return <p>Loading...</p>
+        return <div className="w-4 mx-auto mt-80"><RotateLoader color="#ff4564" /></div>;
     }
 
     if (user && validPosition) {

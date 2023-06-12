@@ -2,6 +2,7 @@ import { Navigate, useLocation } from "react-router";
 import usePositionVerify from "../hooks/usePositionVerify";
 import { useContext } from "react";
 import { IdentityContext } from "../provider/IdentityProvider";
+import { RotateLoader } from "react-spinners";
 
 
 const InstructorRoute = ({ children }) => {
@@ -10,7 +11,7 @@ const InstructorRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading || isPositionLoading) {
-        return <progress className="progress w-56"></progress>
+        return <div className="w-4 mx-auto mt-80"><RotateLoader color="#ff4564" /></div>
     }
 
     if (user && validPosition) {

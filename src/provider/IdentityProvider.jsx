@@ -16,7 +16,7 @@ export default function IdentityProvider({ children }) {
         return createUserWithEmailAndPassword(authentication, email, password);
     };
 
-
+    
     const emailPasswordSignIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(authentication, email, password);
@@ -33,30 +33,29 @@ export default function IdentityProvider({ children }) {
     };
 
     const logOut = () => {
+        setLoading(true);
         return signOut(authentication);
     };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(authentication, (userNow) => {
             setUser(userNow);
+            console.log(userNow)
             // set jwt
+            console.log("user", userNow);
             if (userNow) {
                 axios.post("http://localhost:5000/token", { email: userNow.email }).then(data => {
                     if (data.data) {
                         localStorage.setItem("private-token", data?.data?.token)
                         setLoading(false)
                     }
-                    else {
-                        localStorage.removeItem("private-token")
-                        setLoading(false)
-                    }
+                    
                 })
             }
-            // {
-            //     userNow ? axios.post("http://localhost:5000/token", { email: userNow.email }).then(data => {
-            //         localStorage.setItem("private-token", data?.data.token)
-            //     }) : localStorage.removeItem("private-token")
-            // }
+            else {
+                localStorage.removeItem("private-token")
+                setLoading(false)
+            }
 
         });
 

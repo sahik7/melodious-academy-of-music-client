@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { IdentityContext } from '../../../provider/IdentityProvider';
 import useAxiosProtect from '../../../hooks/useAxiosProtect';
+import { toast } from 'react-hot-toast';
 
 const AddingClass = () => {
   const { user } = useContext(IdentityContext);
@@ -11,8 +12,12 @@ const AddingClass = () => {
   const onSubmit = async(data) => {
     data.instructorName = user?.displayName || '';
     data.instructorEmail = user?.email || '';
+    data.availableSeats = parseInt(data.availableSeats);
+    data.price = parseInt(data.price);
+
 
     const response = await instance.post('/classes', data).then(data => {console.log(data)})
+    toast.success("Class Added Successfully")
     reset();
   };
 

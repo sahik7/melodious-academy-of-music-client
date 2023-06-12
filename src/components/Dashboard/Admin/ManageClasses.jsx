@@ -74,7 +74,7 @@ const ManageClasses = () => {
             <tr key={index}>
               <td className="table-data">{index + 1}</td>
               <td className="table-data">
-                <img src={item?.image} alt="Profile" className="w-8 h-8 rounded-full" />
+                <img src={item?.image} alt="Profile" className="w-8 object-cover object-center h-8 rounded-full" />
               </td>
               <td className="table-data">{item?.className}</td>
               <td className="table-data">{item?.instructorName}</td>

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Holder from '../../components/Holder';
 import SingleClass from './SingleClass';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosProtect from '../../hooks/useAxiosProtect';
 
 
 const AllClasses = () => {
-    const [allClasses, setAllClasses] = useState([])
-
-    useEffect(() => {
-        fetch("http://localhost:5000/classes?approved=true").then(res => res.json()).then(data => setAllClasses(data))
-    }, [])
-
-
-    console.log(allClasses)
+    const { instance } = useAxiosProtect();
+    const { data: allClasses = [], refetch } = useQuery(["manage-classes"], async () => {
+        const res = await instance("/classes?approved=true");
+        console.log(res.data);
+        return res.data;
+      });
     
 
     return (

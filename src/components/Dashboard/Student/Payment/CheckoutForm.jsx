@@ -81,7 +81,7 @@ const CheckoutForm = ({ price, selectId }) => {
                     }).catch(error => console.log(error))
                 }
                 toast.success("available seats successfully done")
-            })
+            }).catch(error => console.log(error))
             
             const paymentId = paymentIntent.id
             const paymentInfo = {

@@ -30,9 +30,15 @@ const LoginPage = () => {
     try {
       const result = await googleSignIn();
       if(result.user){
-        result.user
+        const email = result.user.email
+        const loggedIn = {
+          email:email
+        }
         toast.success("Login Successfully");
         reset()
+        // fetch("http://localhost:5000/token",{method:"POST",headers:{"Content-Type": "application/json"},body:JSON.stringify(loggedIn)}).then(response => response.json()).then(data => {
+        //   console.log("token res",data)
+        // })
         navigate(from, { replace: true });
       }
     } catch (error) {
