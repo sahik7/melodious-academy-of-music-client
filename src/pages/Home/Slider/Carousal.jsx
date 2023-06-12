@@ -7,21 +7,21 @@ const Carousel = () => {
 
   const slides = [
     {
-      image: 'banner-1.png',
+      image: 'https://i.ibb.co/5h2MX79/banner-1.png',
       title: 'Unlock Your Musical Potential with the Piano',
       text: 'Immerse yourself in the enchanting world of piano melodies. From beginner to advanced, our expert instructors will guide you on a journey to master this timeless instrument.',
       titleColor: '#ffdab5', // Red color
       textColor: '#ffdab5', // Green color
     },
     {
-      image: 'banner-2.png',
+      image: 'https://i.ibb.co/vwy56KD/banner-2.png',
       title: 'Discover the Ethereal Magic of Flute',
       text: 'Let the hauntingly beautiful notes of the flute transport you to new musical heights. Our dedicated flute instructors will help you cultivate your skills and explore the enchanting repertoire',
       titleColor: '#ff4564', // Blue color
       textColor: 'grey', // Yellow color
     },
     {
-      image: 'banner-3.png',
+      image: 'https://i.ibb.co/M63xQXf/banner-3.png',
       title: 'Strum Your Way to Musical Greatness with the Power of Guitar',
       text: 'Unleash your inner rockstar or serenade with soulful melodies. Our experienced guitar teachers will teach you everything from classic chords to advanced techniques, empowering you to create music that resonates with your heart.',
       titleColor: '#ffdab5', // Magenta color
@@ -58,13 +58,13 @@ const Carousel = () => {
             <div className="carousel-content absolute w-10/12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
             <Slide>
               <h2
-                className="lg:text-5xl text-2xl font-avail font-bold mb-4 lg:w-1/2 lg:mx-0 mx-auto"
+                className="lg:text-5xl text-2xl font-avail font-bold mb-4 lg:w-1/2 lg:mx-0 mx-auto lg:text-right text-center"
                 style={{ color: slide.titleColor }}
               >
                 {slide.title}
               </h2>
       </Slide>
-              <p className="text-gray-200 lg:w-1/2" style={{ color: slide.textColor }}>
+              <p className="text-gray-200 lg:w-1/2 lg:text-right text-center" style={{ color: slide.textColor }}>
                 {slide.text}
               </p>
             </div>

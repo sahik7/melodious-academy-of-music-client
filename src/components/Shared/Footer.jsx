@@ -43,9 +43,9 @@ City of Melodia</p>
             </div>
             <div className="bg-black py-8">
             <Holder>
-                <div className="flex items-center justify-between font-light">
-                <img className="w-28" src="https://i.ibb.co/W3FH5Zx/big-logo.png" alt="" />
-                <p className="text-white">&copy; 2023 Meledious Academy of Music. All rights reserved.</p>
+                <div className="lg:flex items-center justify-between font-light">
+                <img className="w-28 mx-auto lg:mx-0" src="https://i.ibb.co/W3FH5Zx/big-logo.png" alt="" />
+                <p className="text-white lg:text-left text-center lg:my-0 my-8">&copy; 2023 Meledious Academy of Music. All rights reserved.</p>
                 </div>
             </Holder>
             </div>
