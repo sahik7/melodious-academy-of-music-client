@@ -9,6 +9,7 @@ const MyClasses = () => {
   const { user } = useContext(IdentityContext)
   const { instance } = useAxiosProtect()
   const [isOpen, setIsOpen] = useState(false);
+  const [feedback, setFeedback] = useState("");
   const [isOpenUpdate, setIsOpenUpdate] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -21,7 +22,8 @@ const MyClasses = () => {
   console.log("instructor classes", instructorClasses)
 
 
-  const openModal = () => {
+  const openModal = (feedback) => {
+    setFeedback(feedback)
     setIsOpen(true);
   };
   const openUpdateModal = () => {
@@ -51,7 +53,7 @@ const MyClasses = () => {
             </span>
             <div className="text-center p-5">
               <p className=' text-3xl font-bold text-main'>Feedback</p>
-              <p className='w-2/3 mx-auto mt-10'>asdfaefawse ashufha r qrg uhv fd fhuh g hwubhu buh ufbh bhh buio;hsdfuhudfg</p>
+              <p className='w-2/3 mx-auto mt-10'>{feedback}</p>
             </div>
           </div>
         </div>
@@ -108,10 +110,10 @@ const MyClasses = () => {
                   <RiEdit2Line />
                 </button>
               </td>
-              <td className={` ${item.status === "denied" ? "block table-data text-center" : "hidden"}`}>
+              <td className={` ${item.status !== "pending" ? "block table-data text-center" : "hidden"}`}>
                 <button
-                  className={`  ${item.status === "denied" ? "block btn-primary font-bold text-sm py-2 px-3 rounded" : "hidden"}`}
-                  onClick={openModal}
+                  className={`  ${item.status !== "pending" ? "block table-data font-bold text-md py-2 px-3 rounded" : "hidden"}`}
+                  onClick={() => openModal(item.feedback)}
                 >
                   <RiFeedbackLine />
                 </button>
