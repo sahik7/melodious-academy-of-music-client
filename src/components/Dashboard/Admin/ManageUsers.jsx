@@ -24,7 +24,7 @@ const ManageUsers = () => {
   };
 
   const updateUserPosition = (id, index, position) => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://melodious-academy-of-music-server.vercel.app/users/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"

@@ -7,7 +7,7 @@ import axios from 'axios';
 const useAxiosProtect = () => {
     const { logOut } = useContext(IdentityContext);
     const navigate = useNavigate();
-    const instance = axios.create({ baseURL: 'http://localhost:5000' })
+    const instance = axios.create({ baseURL: 'https://melodious-academy-of-music-server.vercel.app' })
 
     useEffect(() => {
         instance.interceptors.request.use((config) => {

@@ -80,7 +80,7 @@ const ManageClasses = () => {
               <td className="table-data">{item?.instructorName}</td>
               <td className="table-data">{item?.instructorEmail}</td>
               <td className="table-data">{item?.availableSeats}</td>
-              <td className="table-data">{item?.price}</td>
+              <td className="table-data">${item?.price}</td>
               <td className="table-data">{item?.status}</td>
               <td className="table-data space-y-3">
               <button

@@ -16,7 +16,7 @@ export default function IdentityProvider({ children }) {
         return createUserWithEmailAndPassword(authentication, email, password);
     };
 
-    
+
     const emailPasswordSignIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(authentication, email, password);
@@ -44,7 +44,7 @@ export default function IdentityProvider({ children }) {
             // set jwt
             console.log("user", userNow);
             if (userNow) {
-                axios.post("http://localhost:5000/token", { email: userNow.email }).then(data => {
+                axios.post("https://melodious-academy-of-music-server.vercel.app/token", { email: userNow.email }).then(data => {
                     if (data.data) {
                         localStorage.setItem("private-token", data?.data?.token)
                         setLoading(false)

@@ -22,7 +22,7 @@ const SingleClass = ({ data }) => {
                 availableSeats:availableSeats
 
             }
-            fetch(`http://localhost:5000/my-classes/${_id}`, { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(myClassData) }).then(response => response.json()).then(() => {
+            fetch(`https://melodious-academy-of-music-server.vercel.app/my-classes/${_id}`, { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(myClassData) }).then(response => response.json()).then(() => {
                 toast.success("Successfully Selected")
             })
         }

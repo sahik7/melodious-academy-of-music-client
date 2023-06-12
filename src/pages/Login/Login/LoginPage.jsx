@@ -36,7 +36,7 @@ const LoginPage = () => {
         }
         toast.success("Login Successfully");
         reset()
-        // fetch("http://localhost:5000/token",{method:"POST",headers:{"Content-Type": "application/json"},body:JSON.stringify(loggedIn)}).then(response => response.json()).then(data => {
+        // fetch("https://melodious-academy-of-music-server.vercel.app/token",{method:"POST",headers:{"Content-Type": "application/json"},body:JSON.stringify(loggedIn)}).then(response => response.json()).then(data => {
         //   console.log("token res",data)
         // })
         navigate(from, { replace: true });
